@@ -1,0 +1,75 @@
+@import "../material-shadows";
+@smartphones: ~"only screen and (max-width: 768px) and (min-width:600px)";
+
+.account_row{
+  height: auto;
+
+  .account_list_item_wrapper{
+    .account_list_item{
+      margin-left: 15px;
+      margin-right: 15px;
+      border: 1px rgb(184, 185, 185) solid;
+      margin-bottom: 20px;
+      .z-depth(1);
+      transition: all 0.1s ease-in;
+      display: block;
+      text-decoration: none;
+      color: #333333;
+
+      &:hover{
+        .z-depth(2);
+      }
+      .account_list_item_top{
+        background: no-repeat right -14px center;
+        background-size: 59% ;
+
+      }
+      @media @smartphones {
+        .account_list_item_top{
+                            background-size: 45% ;
+                          }
+      }
+      .specs{
+        width:auto; /* size the block automatically */
+        display: inline-block;
+        padding: 0;
+        list-style: none;
+        margin-left: 10px;
+        margin-top:10px;
+        min-width: 40%;
+        li{
+          padding: 5px 10px;
+          margin-bottom: 5px;
+          .z-depth(1);
+          background-color: rgb(80, 149, 213);
+          color: #ffffff;
+          font-weight: bold;
+        }
+      }
+      .title{
+        padding: 5px 10px;
+        height: 55px;
+        overflow: hidden;
+        background-color: #e7e7e7;
+        font-weight: bold;
+        .z-depth-bottom(1);
+
+        border: solid #b8b9b9;
+        border-width: 1px 0px 1px 0px;
+      }
+      .seller_info{
+        padding: 5px;
+        text-align: right;
+      }
+    }
+  }
+}
+
+.Unranked{background-color: rgb(193, 221, 218);}
+.Bronze{background-color: rgb(241, 209, 185);}
+.Silver{background-color: rgb(206, 217, 200);}
+.Gold{background-color: rgb(255, 219, 94);}
+.Platinum{background-color: rgb(193, 221, 202);}
+.Diamond{background-color: rgb(193, 214, 238);}
+.Master{background-color: rgb(169, 224, 211);}
+.Challenger{background-color: rgb(120, 231, 222);}
