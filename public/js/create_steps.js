@@ -104,3 +104,10 @@ new Vue({
         }
     }
 });
+
+
+$(document).ready(function() {
+    $("#editor").wysibb({
+        minheight:200
+    });
+})

@@ -75,8 +75,8 @@
                                <input type="number" name="champions" min="0" class="form-control" v-model="steps.step1.champions | splitLong 3"/>
                            </div>
                            <div class="form-group col-md-4">
-                               {!! Form::label('skins', 'Number of Skins:', ['class' => 'control-label']) !!}
-                               <input type="number" name="skins" min="0" class="form-control" v-model="steps.step1.skins | splitLong 3"/>
+                                   {!! Form::label('skins', 'Number of Skins:', ['class' => 'control-label']) !!}
+                                   <input type="number" name="skins" min="0" class="form-control" v-model="steps.step1.skins | splitLong 3"/>
                            </div>
                            <div class="form-group col-md-3">
                                {!! Form::label('price', 'Price:', ['class' => 'control-label']) !!}
@@ -92,29 +92,92 @@
                </div>
             </div>
         </div>
-        <button nextpage="2" class="btn btn-primary btn-lg" v-on="click: nextStep">
-            Next Step
-        </button>
+        <div class="col-xs-12">
+            <button nextpage="2" class="btn btn-primary btn-lg" v-on="click: nextStep">
+                Next Step
+            </button>
+        </div>
     </div>
     <div class="row setup-content" id="step-2" v-show="steps.step2.active">
         <div class="col-xs-12">
             <div class="col-sm-12 well">
                 <h1> STEP 2</h1>
-                    <textarea style="min-height: 300px"  id="editor" name="body"></textarea>
-                <button nextpage="3" class="btn btn-primary btn-lg" v-on="click: nextStep">Next Step</button>
+                <label for="editor">Write something about your account...</label>
+                <textarea style="min-height: 300px"  id="editor" name="body"></textarea>
             </div>
         </div>
-
-
+        <div class="col-xs-12">
+            <button nextpage="3" class="btn btn-primary btn-lg" v-on="click: nextStep">
+                Next Step
+            </button>
+        </div>
     </div>
     <div class="row setup-content" id="step-3" v-show="steps.step3.active">
         <div class="col-xs-12">
-            <div class="col-sm-12 well text-center">
+            <div class="col-sm-12 well">
                 <h1> STEP 3</h1>
-                <button nextpage="4" class="btn btn-primary btn-lg" v-on="click: nextStep">
-                    Next Step
-                </button>
+                <div class="form-group">
+                    <label for="countq" class="control-label">Choose one...</label>
+                    <select name="countq" id="countq" class="form-control">
+                        <option value="0">I want to sell only one account</option>
+                        <option value="1">I have more similar account to sell</option>
+                    </select>
+                </div>
+                <div  class="form-group">
+                    <label for="count" class="control-label">How many accounts do you want to sell?</label>
+                    <input name="count" id="count" type="number" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="first_owner" class="control-label">Are you the original and only owner of this account?</label>
+                    <div class="input-group">
+                        <div class="btn-group check">
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="first_owner" data-title="Y">YES</a>
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="first_owner" data-title="N">NO</a>
+                        </div>
+                        <input type="hidden" name="first_owner" id="first_owner">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="has_email" class="control-label">Do you have access to the account's registered email address?</label>
+                    <div class="input-group">
+                        <div class="btn-group check">
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="has_email" data-title="Y">YES</a>
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="has_email" data-title="N">NO</a>
+                        </div>
+                        <input type="hidden" name="has_email" id="has_email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="duration" class="control-label">How long would you like your offer to be available on our site?</label>
+                    <div class="input-group">
+                        <div class="btn-group check">
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="duration" data-title="7">7 Days</a>
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="duration" data-title="14">14 Days</a>
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="duration" data-title="30">30 Days</a>
+                        </div>
+                        <input type="hidden" name="duration" id="duration">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="delivery" class="control-label">How quickly can you guarantee delivery to a buyer after we notify you that an order has been successfully placed and verified?</label>
+                    <div class="input-group">
+                        <div class="btn-group check">
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="delivery" data-title="0.33">20 Minutes</a>
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="delivery" data-title="2">2 Hours</a>
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="delivery" data-title="24">24 Hours</a>
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="delivery" data-title="48">48 Hours</a>
+                            <a class="btn btn-primary btn-sm notActive" data-toggle="delivery" data-title="custom">Custom (soon...)</a>
+                        </div>
+                        <input type="hidden" name="delivery" id="delivery">
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="col-xs-12">
+            <button nextpage="4" class="btn btn-primary btn-lg" v-on="click: nextStep">
+                Next Step
+            </button>
         </div>
     </div>
     <div class="row setup-content" id="step-4" v-show="steps.step4.active">
@@ -126,21 +189,28 @@
     </div>
 </div>
 
-<script src="{{asset('js/vue.js')}}"></script>
-<script src="{{asset('js/create_steps.js')}}"></script>
-
-<link rel="stylesheet" href="/css/default/wbbtheme.css" />
-
-
- @endsection
+@endsection
 
 @section('scripts')
-    <script src="/js/jquery.wysibb.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#editor").wysibb({
-                minHeight:'500px'
-            });
+    <script src="{{asset('js/vue.js')}}"></script>
+    <script src="{{asset('js/create_steps.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('css/default/wbbtheme.css')}}" />
+    <script src="{{asset('js/jquery.wysibb.js')}}"></script>
+
+    <style type="text/css">
+        .check .notActive{
+            color: #3276b1;
+            background-color: #fff;
+        }
+    </style>
+    <script type="text/javascript">
+        $('.check a').on('click', function(){
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#'+tog).prop('value', sel);
+
+            $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
         })
     </script>
-    @endsection
+@endsection

@@ -28,6 +28,7 @@ class PaymentService {
     function __construct()
     {
         $this->PayPal = new Adaptive(config('paypal'));
+        $this->PayPal['IPAddress']=$_SERVER['REMOTE_ADDR'];
         $this->PayRequestFields();
         $this->ClientDetailsFields();
         $this->Receivers = array();
