@@ -20,7 +20,7 @@ class Account extends Model
             $query->select($array_columns);
         }]);
     }
-
+    //ide most egy kurvajó feature érkezik
 
     public function setDivisionAttribute($value)
     {
