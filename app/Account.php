@@ -11,7 +11,7 @@ class Account extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function scopeWithUser($query, $array_columns = ["*"])
+    public function scopeWithUser($query, $array_columns = ["*"], $asdasdasd)
     {
         if ( $array_columns != ["*"] && !in_array('id', $array_columns)) {
             array_unshift($array_columns, 'id');
