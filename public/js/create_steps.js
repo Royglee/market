@@ -49,7 +49,7 @@ new Vue({
         steps:{
             step1:{
                 disabled:false,
-                active:true,
+                active:false,
                 number:1,
                 desc:'First step description',
                 title:'',
@@ -68,10 +68,18 @@ new Vue({
 
             },
             step3:{
-                disabled:true,
-                active:false,
+                disabled:false,
+                active:true,
                 number:3,
-                desc:'Third step description'
+                desc:'Third step description',
+                isMore:'',
+                count:'',
+                firstOwner:'',
+                hasEmail:'',
+                duration:'',
+                delivery:''
+
+
             },
             step4:{
                 disabled:true,
