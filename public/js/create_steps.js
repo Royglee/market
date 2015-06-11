@@ -7,19 +7,18 @@ new Vue({
     filters: {
         splitLong: {
             read:function(val,oldval, max){
-                if (val.length > max){
+                if (val.length > max || val < 0){
                     return oldval;
                 }
                 return val;
             },
             write:function(val, oldval, max){
-                if (val.length > max){
+                if (val.length > max || val < 0){
                     return oldval;
                 }
                 return val;
             }
         }
-
     },
     methods:{
         showStep:function(step, e){
@@ -118,4 +117,21 @@ $(document).ready(function() {
     $("#editor").wysibb({
         minheight:200
     });
-})
+    $('.check a').on('click', function(){
+        var sel = $(this).data('title');
+        var tog = $(this).data('toggle');
+        $('#'+tog).prop('value', sel);
+
+        $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+        $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+    })
+    $(' #deliveryselect ').on('click',function(){
+        var custom = $("a[data-type='custom']").hasClass('active');
+        var delivery = $('#deliverygroup');
+        if (custom){
+            delivery.removeClass('hidden');
+            $('#delivery').focus();
+        }
+        else{delivery.addClass('hidden');}
+    });
+});

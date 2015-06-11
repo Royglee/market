@@ -103,7 +103,7 @@
             <div class="col-sm-12 well">
                 <h1> STEP 2</h1>
                 <label for="editor">Write something about your account...</label>
-                <textarea style="min-height: 300px"  id="editor" name="body"></textarea>
+                <textarea style=""  id="editor" name="body"></textarea>
             </div>
         </div>
         <div class="col-xs-12">
@@ -116,7 +116,7 @@
         <div class="col-xs-12">
             <div class="col-sm-12 well">
                 <h1> STEP 3</h1>
-                <div class="form-group">
+                <div class="col-md-push-2 col-md-7"><div class="form-group">
                     <label for="countq" class="control-label">Choose one...</label>
                     <select name="countq" id="countq" class="form-control" v-model="steps.step3.isMore">
                         <option value="0">I want to sell only one account</option>
@@ -125,7 +125,7 @@
                 </div>
                 <div  class="form-group" v-if="steps.step3.isMore >0">
                     <label for="count" class="control-label">How many accounts do you want to sell?</label>
-                    <input name="count" id="count" type="number" class="form-control" v-model="steps.step3.count"/>
+                    <input name="count" id="count" type="number" class="form-control" v-model="steps.step3.count | splitLong 3"/>
                 </div>
 
                 <div class="form-group">
@@ -169,12 +169,17 @@
                             <a class="btn btn-primary btn-md notActive" data-toggle="delivery" data-title="48">48 Hours</a>
                             <a class="btn btn-primary btn-md notActive" data-type="custom" data-toggle="delivery" data-title="">Custom</a>
                             <div class="input-group hidden" id="deliverygroup">
-                                <input type="number" name="delivery" id="delivery" aria-describedby="deliveryaddon" class="form-control" v-model="steps.step3.delivery">
+                                <input type="number"
+                                       name="delivery"
+                                       id="delivery"
+                                       aria-describedby="deliveryaddon"
+                                       class="form-control"
+                                       v-model="steps.step3.delivery | splitLong 3">
                                 <span class="input-group-addon" id="deliveryaddon">Hours</span>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></div>
 
             </div>
         </div>
@@ -200,27 +205,4 @@
     <script src="{{asset('js/create_steps.js')}}"></script>
     <link rel="stylesheet" href="{{asset('css/default/wbbtheme.css')}}" />
     <script src="{{asset('js/jquery.wysibb.js')}}"></script>
-
-    <style type="text/css">
-        .check .notActive{
-            color: #3276b1;
-            background-color: #fff;
-        }
-    </style>
-    <script type="text/javascript">
-        $('.check a').on('click', function(){
-            var sel = $(this).data('title');
-            var tog = $(this).data('toggle');
-            $('#'+tog).prop('value', sel);
-
-            $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
-            $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
-        })
-        $(' #deliveryselect ').on('click',function(){
-            var custom = $("a[data-type='custom']").hasClass('active');
-            var delivery = $('#deliverygroup');
-            if (custom){delivery.removeClass('hidden')}
-                else{delivery.addClass('hidden')}
-        });
-    </script>
 @endsection
