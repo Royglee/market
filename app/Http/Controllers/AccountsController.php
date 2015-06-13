@@ -54,7 +54,7 @@ class AccountsController extends Controller {
      */
 	public function store(CreateAccountRequest $request)
 	{
-        dd($request);
+        dd($request->all());
 	}
 
     /**

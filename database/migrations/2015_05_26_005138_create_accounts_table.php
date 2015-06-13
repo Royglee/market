@@ -16,8 +16,13 @@ class CreateAccountsTable extends Migration {
 		{
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->boolean('countq');
+            $table->integer('count')->nullable();
+            $table->boolean('has_email');
+            $table->boolean('first_owner');
+            $table->integer('duration');
+            $table->float('delivery');
             $table->string('title');
-
             $table->float('price');
             $table->string('server');
             $table->string('league');
