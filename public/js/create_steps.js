@@ -4,6 +4,7 @@
 
 create = new Vue({
     el:'#create-page',
+
     filters: {
         splitLong: {
             read:function(val,oldval, max){
@@ -61,7 +62,7 @@ create = new Vue({
 
             },
             step1:{
-                disabled:false,
+                disabled: ($('#errors').data('error') > 0)? false : true,
                 active:false,
                 number:2,
                 desc:'Second step description',
@@ -74,7 +75,7 @@ create = new Vue({
                 price:''
             },
             step2:{
-                disabled:true,
+                disabled:($('#errors').data('error') > 0)? false : true,
                 active:false,
                 number:3,
                 desc:'Third step description'
@@ -102,6 +103,35 @@ create = new Vue({
             else {
                 return league+'.png';
             }
+        }
+    },
+    ready:function(){
+        var step1 =['countq', 'count', 'first_owner', 'has_email', 'duration', 'delivery'];
+        var step2 = ['title','price','server','league','division','champions','skins'];
+        var errorlist = $(' #errors ').text().split(' ');
+        var isError = ($('#errors').data('error') > 0)? true : false;
+        var firstError = "";
+        if (isError) {
+           if (firstError == "") {
+               $.each(step1, function (index, value) {
+                   if ($.inArray(value, errorlist) != -1) {
+                       firstError="#step-1";
+                   }
+               });
+           }
+            if (firstError == "") {
+                $.each(step2, function (index, value) {
+                    if ($.inArray(value, errorlist) != -1) {
+                        firstError="#step-2";
+                    }
+                });
+            }
+            if (firstError == "") {
+                firstError="#step-3";
+            }
+
+
+            $(' ul.setup-panel a[href="'+firstError+'"] ').closest('li').click();
         }
     }
 });
@@ -134,7 +164,8 @@ $(document).ready(function() {
         var tog = $(this).data('toggle');
         var sel = $(this).data('title');
         var value = $('#'+tog).attr('value');
-        if(value == sel){
+
+        if(value == sel && value != ""){
             $(this).removeClass('notActive').addClass('active');
         }
         if($(this).data('type') == 'custom' && jQuery.inArray(parseInt(value), [0.33,2,24,48]) == -1 && value != ""){

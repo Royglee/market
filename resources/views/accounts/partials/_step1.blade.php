@@ -5,11 +5,11 @@
             <div class="col-md-push-2 col-md-7"><div class="form-group">
                     <label for="countq" class="control-label">Choose one...</label>
                     <select name="countq" id="countq" class="form-control" value="{{ old('countq') }}" v-model="steps.step3.isMore">
-                        <option value="1">I want to sell only one account</option>
-                        <option value="2">I have more similar account to sell</option>
+                        <option value="0">I want to sell only one account</option>
+                        <option value="1">I have more similar account to sell</option>
                     </select>
                 </div>
-                <div  class="form-group" v-if="steps.step3.isMore >1">
+                <div  class="form-group" v-if="steps.step3.isMore >0">
                     <label for="count" class="control-label">How many accounts do you want to sell?</label>
                     <input name="count" id="count" type="number" class="form-control" value="{{ old('count') }}" v-model="steps.step3.count | splitLong 3"/>
                 </div>
@@ -19,7 +19,7 @@
                     <div class="input-group">
                         <div class="btn-group check">
                             <a class="btn btn-primary btn-md notActive" data-toggle="first_owner" data-title="1">YES</a>
-                            <a class="btn btn-primary btn-md notActive" data-toggle="first_owner" data-title="-1">NO</a>
+                            <a class="btn btn-primary btn-md notActive" data-toggle="first_owner" data-title="0">NO</a>
                         </div>
                         <input type="hidden" name="first_owner" id="first_owner" value="{{ old('first_owner') }}" v-model="steps.step3.firstOwner" />
                     </div>
@@ -29,7 +29,7 @@
                     <div class="input-group">
                         <div class="btn-group check">
                             <a class="btn btn-primary btn-md notActive" data-toggle="has_email" data-title="1">YES</a>
-                            <a class="btn btn-primary btn-md notActive" data-toggle="has_email" data-title="-1">NO</a>
+                            <a class="btn btn-primary btn-md notActive" data-toggle="has_email" data-title="0">NO</a>
                         </div>
                         <input type="hidden" name="has_email" id="has_email" value="{{ old('has_email') }}" v-model="steps.step3.hasEmail" />
                     </div>

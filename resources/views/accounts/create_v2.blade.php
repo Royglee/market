@@ -18,6 +18,9 @@
             </ul>
         </div>
     </div>
+   <div class="row"> <div class="col-xs-12">
+        @include('accounts/partials/_errors')
+    </div></div>
     {!! Form::open(['url' => action('AccountsController@store'), 'method' => 'post', 'role'=>'form']) !!}
     @include('accounts/partials/_step1')
     @include('accounts/partials/_step2')
