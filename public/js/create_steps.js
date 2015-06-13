@@ -2,7 +2,7 @@
  * Created by Marcell on 2015.06.04..
  */
 
-new Vue({
+create = new Vue({
     el:'#create-page',
     filters: {
         splitLong: {
@@ -46,32 +46,12 @@ new Vue({
     },
     data:{
         steps:{
-            step1:{
-                disabled:false,
-                active:false,
-                number:1,
-                desc:'First step description',
-                title:'',
-                server:'',
-                league:'Unranked',
-                division:'1',
-                champions:'',
-                skins:'',
-                price:''
-            },
-            step2:{
-                disabled:true,
-                active:false,
-                number:2,
-                desc:'Second step description'
-
-            },
             step3:{
                 disabled:false,
                 active:true,
-                number:3,
-                desc:'Third step description',
-                isMore:'',
+                number:1,
+                desc:'First step description',
+                isMore:($('#countq').attr('value'))? $('#countq').attr('value') : '',
                 count:'',
                 firstOwner:'',
                 hasEmail:'',
@@ -80,11 +60,25 @@ new Vue({
 
 
             },
-            step4:{
+            step1:{
+                disabled:false,
+                active:false,
+                number:2,
+                desc:'Second step description',
+                title:'',
+                server:($('#server').attr('value'))? $('#server').attr('value') :  '',
+                league:($('#league').attr('value'))? $('#league').attr('value') : 'Unranked',
+                division:($('#division').attr('value'))?$('#division').attr('value') : '1',
+                champions:'',
+                skins:'',
+                price:''
+            },
+            step2:{
                 disabled:true,
                 active:false,
-                number:4,
-                desc:'Fourth step description'
+                number:3,
+                desc:'Third step description'
+
             }
         }
     },
@@ -120,7 +114,8 @@ $(document).ready(function() {
     $('.check a').on('click', function(){
         var sel = $(this).data('title');
         var tog = $(this).data('toggle');
-        $('#'+tog).prop('value', sel);
+        if($(this).data('type') != 'custom'){
+        $('#'+tog).prop('value', sel);}
 
         $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
         $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
@@ -133,5 +128,18 @@ $(document).ready(function() {
             $('#delivery').focus();
         }
         else{delivery.addClass('hidden');}
+    });
+
+    $('.check a').each(function( index ) {
+        var tog = $(this).data('toggle');
+        var sel = $(this).data('title');
+        var value = $('#'+tog).attr('value');
+        if(value == sel){
+            $(this).removeClass('notActive').addClass('active');
+        }
+        if($(this).data('type') == 'custom' && jQuery.inArray(parseInt(value), [0.33,2,24,48]) == -1 && value != ""){
+            $(this).removeClass('notActive').addClass('active');
+            $('#deliverygroup').removeClass('hidden');
+        }
     });
 });

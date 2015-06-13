@@ -3,6 +3,7 @@
 use App\Account;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateAccountRequest;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -44,14 +45,16 @@ class AccountsController extends Controller {
 		return view('accounts.create_v2');
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param CreateAccountRequest|Request $request
+     * @return Response
+     * @internal param Request $data
+     */
+	public function store(CreateAccountRequest $request)
 	{
-		//
+        dd($request);
 	}
 
     /**

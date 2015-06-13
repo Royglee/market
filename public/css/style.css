@@ -6332,9 +6332,13 @@ button.close {
   max-width: 90px;
   min-width: 4em;
 }
+#delivery {
+  border-radius: 0;
+}
 #deliverygroup .input-group-addon {
   color: #fff;
   background-color: #286090;
+  border-radius: 0 6px 6px 0;
 }
 textarea#body {
   resize: vertical;
