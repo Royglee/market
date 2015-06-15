@@ -2,10 +2,17 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @property  user_id
+ */
 class Account extends Model
 {
 
-
+    protected $fillable = [
+        'countq','count','first_owner','has_email','duration','delivery','title','server','league',
+        'division','champions','skins','price','body'
+    ];
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -20,7 +27,6 @@ class Account extends Model
             $query->select($array_columns);
         }]);
     }
-    //ide most egy kurvajó feature érkezik yo
 
     public function setDivisionAttribute($value)
     {

@@ -18,20 +18,20 @@ class CreateAccountsTable extends Migration {
             $table->increments('id');
             $table->boolean('countq');
             $table->integer('count')->nullable();
-            $table->boolean('has_email');
             $table->boolean('first_owner');
+            $table->boolean('has_email');
             $table->integer('duration');
             $table->float('delivery');
             $table->string('title');
-            $table->float('price');
             $table->string('server');
             $table->string('league');
             $table->integer('division')->unsigned()->nullable();
             $table->integer('champions');
             $table->integer('skins');
+            $table->float('price');
+            $table->text('body');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->text('body');
             $table->timestamps();
 		});
 	}
