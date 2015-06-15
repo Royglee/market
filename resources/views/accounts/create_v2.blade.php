@@ -1,5 +1,4 @@
 @extends('app')
-<style>[v-cloak] { display:none }</style>
 @section('content')
 <div id="create-page" class="container">
     <div class="row form-group">
@@ -22,9 +21,9 @@
         @include('accounts/partials/_errors')
     </div></div>
     {!! Form::open(['url' => action('AccountsController@store'), 'method' => 'post', 'role'=>'form']) !!}
-    @include('accounts/partials/_step1')
-    @include('accounts/partials/_step2')
-    @include('accounts/partials/_step3')
+    @include('accounts/partials/_step1', ['input' => Input::old()])
+    @include('accounts/partials/_step2', ['input' => Input::old()])
+    @include('accounts/partials/_step3', ['input' => Input::old()])
     {!! Form::close() !!}
 </div>
 

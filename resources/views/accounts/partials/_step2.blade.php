@@ -31,39 +31,39 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             {!! Form::label('title', 'Title:', ['class' => 'control-label']) !!}
-                            {!! Form::text('title', null, ['class' => 'form-control' , 'v-model' =>'steps.step1.title', 'value' => old('title')]) !!}
+                            <input type="text" class="form-control" name="title" id="title" v-model="steps.step1.title" @if(array_key_exists("title",$input))value="{{$input["title"]}}"@endif/>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-3">
                             {!! Form::label('server', 'Server:', ['class' => 'control-label']) !!}
-                            {!! Form::select('server', ['NA'=>'NA', 'EUNE'=>'EUNE', 'EUW'=>'EUW', 'OCE'=>'OCE', 'BR'=>'BR', 'LA'=>'LA', 'RU'=>'RU', 'TR'=>'TR', 'KR'=>'KR'] , null , ['class' => 'form-control', 'v-model' =>'steps.step1.server', 'value' => old('server')]) !!}
+                            {!! Form::select('server', ['NA'=>'NA', 'EUNE'=>'EUNE', 'EUW'=>'EUW', 'OCE'=>'OCE', 'BR'=>'BR', 'LA'=>'LA', 'RU'=>'RU', 'TR'=>'TR', 'KR'=>'KR'] , null , ['class' => 'form-control', 'v-model' =>'steps.step1.server', 'value' => array_key_exists("server",$input)?$input["server"]:'']) !!}
                         </div>
                         <div class="form-group col-md-6">
                             {!! Form::label('league', 'League:', ['class' => 'control-label']) !!}
-                            {!! Form::select('league', [ 'Unranked'=>'Unranked', 'Bronze'=>'Bronze', 'Silver'=>'Silver', 'Gold'=>'Gold', 'Platinum'=>'Platinum', 'Diamond'=>'Diamond', 'Master'=>'Master', 'Challenger'=>'Challenger'] , null , ['class' => 'form-control', 'v-model' =>'steps.step1.league', 'value' => old('league')]) !!}
+                            {!! Form::select('league', [ 'Unranked'=>'Unranked', 'Bronze'=>'Bronze', 'Silver'=>'Silver', 'Gold'=>'Gold', 'Platinum'=>'Platinum', 'Diamond'=>'Diamond', 'Master'=>'Master', 'Challenger'=>'Challenger'] , null , ['class' => 'form-control', 'v-model' =>'steps.step1.league', 'value' => array_key_exists("league",$input)?$input["league"]:'']) !!}
                         </div>
                         <div class="form-group col-md-3" v-class="hidden: !hasDivision()">
                             {!! Form::label('division', 'Division:', ['class' => 'control-label']) !!}
-                            {!! Form::select('division', [1=>1,2=>2,3=>3,4=>4,5=>5] , null , ['class' => 'form-control', 'v-model' =>'steps.step1.division', 'value' => old('division')]) !!}
+                            {!! Form::select('division', [1=>1,2=>2,3=>3,4=>4,5=>5] , null , ['class' => 'form-control', 'v-model' =>'steps.step1.division', 'value' => array_key_exists("division",$input)?$input["division"]:'']) !!}
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-5">
                             {!! Form::label('champions', 'Number of Champions:', ['class' => 'control-label']) !!}
-                            <input type="number" name="champions" min="0" class="form-control" value="{{ old('champions') }}" v-model="steps.step1.champions | splitLong 3"/>
+                            <input type="number" name="champions" min="0" class="form-control" @if(array_key_exists("champions",$input))value="{{$input["champions"]}}"@endif v-model="steps.step1.champions | splitLong 3"/>
                         </div>
                         <div class="form-group col-md-4">
                             {!! Form::label('skins', 'Number of Skins:', ['class' => 'control-label']) !!}
-                            <input type="number" name="skins" min="0" class="form-control" value="{{ old('skins') }}" v-model="steps.step1.skins | splitLong 3"/>
+                            <input type="number" name="skins" min="0" class="form-control" @if(array_key_exists("skins",$input))value="{{$input["skins"]}}"@endif v-model="steps.step1.skins | splitLong 3"/>
                         </div>
                         <div class="form-group col-md-3">
                             {!! Form::label('price', 'Price:', ['class' => 'control-label']) !!}
 
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="number" min="0" step="any" name="price" value="{{ old('price') }}" class="form-control" v-model="steps.step1.price | splitLong 6"/>
+                                <input type="number" min="0" step="any" name="price" @if(array_key_exists("price",$input))value="{{$input["price"]}}"@endif class="form-control" v-model="steps.step1.price | splitLong 6"/>
                             </div>
                         </div>
                     </div>

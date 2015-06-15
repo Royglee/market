@@ -74,26 +74,32 @@ class AccountsController extends Controller {
         return view('accounts.show', compact('account'));
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param Account $account
+     * @return Response
+     * @internal param int $id
+     */
+	public function edit(Account $account)
 	{
-		//
+        $account = $account->toArray();
+        return view('accounts.edit', compact('account'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Account $account
+     * @param CreateAccountRequest $request
+     * @return Response
+     * @internal param int $id
+     */
+	public function update(Account $account, CreateAccountRequest $request)
 	{
-		//
+        $account->fill($request->all())->save();
+
+        return redirect()->action('AccountsController@index');
 	}
 
 	/**

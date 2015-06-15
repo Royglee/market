@@ -24,9 +24,15 @@ Route::get('/success', function(){
 
 Route::get('/', 'AccountsController@index');
 Route::get('home', 'HomeController@index');
+
 get('accounts', 'AccountsController@index');
+
 get('accounts/create','AccountsController@create');
 post('accounts/store','AccountsController@store');
+
+get('accounts/{account}/edit','AccountsController@edit');
+patch('accounts/{account}','AccountsController@update');
+
 get('accounts/{account}', 'AccountsController@show');
 
 

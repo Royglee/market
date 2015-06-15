@@ -66,7 +66,7 @@ create = new Vue({
                 active:false,
                 number:2,
                 desc:'Second step description',
-                title:'',
+                title:($('#title').attr('value'))? $('#title').attr('value') :  '',
                 server:($('#server').attr('value'))? $('#server').attr('value') :  '',
                 league:($('#league').attr('value'))? $('#league').attr('value') : 'Unranked',
                 division:($('#division').attr('value'))?$('#division').attr('value') : '1',
@@ -133,6 +133,18 @@ create = new Vue({
 
             $(' ul.setup-panel a[href="'+firstError+'"] ').closest('li').click();
         }
+
+        var intRegex =  /^[/.]accounts[/.][0-9]+[/.]edit+$/g;
+        var pathname = $(location).attr('pathname');
+        if (intRegex.test(pathname)){
+            this.steps.step1.disabled = false;
+            this.steps.step1.active = true;
+            this.steps.step2.disabled = false;
+            this.steps.step2.active = true;
+            this.steps.step3.disabled = false;
+            this.steps.step3.active = true;
+            $(' button[nextpage] ').hide();
+        }
     }
 });
 
@@ -168,7 +180,7 @@ $(document).ready(function() {
         if(value == sel && value != ""){
             $(this).removeClass('notActive').addClass('active');
         }
-        if($(this).data('type') == 'custom' && jQuery.inArray(parseInt(value), [0.33,2,24,48]) == -1 && value != ""){
+        if($(this).data('type') == 'custom' && jQuery.inArray(value, ['0.33','2','24','48','0,33']) == -1 && value){
             $(this).removeClass('notActive').addClass('active');
             $('#deliverygroup').removeClass('hidden');
         }

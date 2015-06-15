@@ -4,14 +4,14 @@
             <h1> STEP 1</h1>
             <div class="col-md-push-2 col-md-7"><div class="form-group">
                     <label for="countq" class="control-label">Choose one...</label>
-                    <select name="countq" id="countq" class="form-control" value="{{ old('countq') }}" v-model="steps.step3.isMore">
+                    <select name="countq" id="countq" class="form-control" @if(array_key_exists("countq",$input))value="{{$input["countq"]}}"@endif v-model="steps.step3.isMore">
                         <option value="0">I want to sell only one account</option>
                         <option value="1">I have more similar account to sell</option>
                     </select>
                 </div>
                 <div  class="form-group" v-if="steps.step3.isMore >0">
                     <label for="count" class="control-label">How many accounts do you want to sell?</label>
-                    <input name="count" id="count" type="number" class="form-control" value="{{ old('count') }}" v-model="steps.step3.count | splitLong 3"/>
+                    <input name="count" id="count" type="number" class="form-control" @if(array_key_exists ("count" , $input ))value="{{$input["count"]}}"@endif v-model="steps.step3.count | splitLong 3"/>
                 </div>
 
                 <div class="form-group">
@@ -21,7 +21,7 @@
                             <a class="btn btn-primary btn-md notActive" data-toggle="first_owner" data-title="1">YES</a>
                             <a class="btn btn-primary btn-md notActive" data-toggle="first_owner" data-title="0">NO</a>
                         </div>
-                        <input type="hidden" name="first_owner" id="first_owner" value="{{ old('first_owner') }}" v-model="steps.step3.firstOwner" />
+                        <input type="hidden" name="first_owner" id="first_owner" @if(array_key_exists("first_owner",$input))value="{{$input["first_owner"]}}"@endif v-model="steps.step3.firstOwner" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -31,7 +31,7 @@
                             <a class="btn btn-primary btn-md notActive" data-toggle="has_email" data-title="1">YES</a>
                             <a class="btn btn-primary btn-md notActive" data-toggle="has_email" data-title="0">NO</a>
                         </div>
-                        <input type="hidden" name="has_email" id="has_email" value="{{ old('has_email') }}" v-model="steps.step3.hasEmail" />
+                        <input type="hidden" name="has_email" id="has_email" @if(array_key_exists("has_email",$input))value="{{$input["has_email"]}}"@endif v-model="steps.step3.hasEmail" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -42,7 +42,7 @@
                             <a class="btn btn-primary btn-md notActive" data-toggle="duration" data-title="14">14 Days</a>
                             <a class="btn btn-primary btn-md notActive" data-toggle="duration" data-title="30">30 Days</a>
                         </div>
-                        <input type="hidden" name="duration" id="duration" value="{{ old('duration') }}" v-model="steps.step3.duration">
+                        <input type="hidden" name="duration" id="duration" @if(array_key_exists("duration",$input))value="{{$input["duration"]}}"@endif v-model="steps.step3.duration">
                     </div>
                 </div>
                 <div class="form-group">
@@ -59,7 +59,7 @@
                                        step="any"
                                        name="delivery"
                                        id="delivery"
-                                       value="{{ old('delivery') }}"
+                                       @if(array_key_exists("delivery",$input))value="{{$input["delivery"]}}"@endif
                                        aria-describedby="deliveryaddon"
                                        class="form-control"
                                        v-model="steps.step3.delivery | splitLong 3">

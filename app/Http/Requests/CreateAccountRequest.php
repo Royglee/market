@@ -33,7 +33,7 @@ class CreateAccountRequest extends Request
             'duration'=>'required|in:7,14,30',
             'delivery'=>'required',
             'title' => 'required|max:255|min:3',
-            'server' => 'required|in:NA EUNE,EUW,OCE,BR,LA,RU,TR,KR',
+            'server' => 'required|in:NA,EUNE,EUW,OCE,BR,LA,RU,TR,KR',
             'league' => 'required|in:Unranked,Bronze,Silver,Gold,Platinum,Diamond,Master,Challenger',
             'division' => 'required|integer|min:0|max:5',
             'champions' => 'required|digits_between:1,3|integer',
