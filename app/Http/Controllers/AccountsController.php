@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAccountRequest;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 
@@ -30,7 +31,7 @@ class AccountsController extends Controller {
             return $accounts->with('user')->get();
         });*/
         //Cache::forget('account');
-        $accounts= $accounts->withUser(['name'])->get();
+        $accounts= $accounts->withUser(['name'])->orderBy('created_at', 'desc')->get();
 
         return view('accounts.index', compact('accounts'));
 	}
@@ -54,7 +55,9 @@ class AccountsController extends Controller {
      */
 	public function store(CreateAccountRequest $request)
 	{
-        dd($request->all());
+        $request->user()->accounts()->create($request->all());
+
+        return redirect()->action('AccountsController@index');
 	}
 
     /**
