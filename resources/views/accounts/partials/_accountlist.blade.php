@@ -16,17 +16,18 @@
                         </ul>
                     </div>
                     <div class="title">
-                        {{--<a href="{{asset('accounts/'.$account->id)}}">{{$account->title}}</a>--}}
                         {{$account->title}}
+                        @if($account->count)<span class="count {{$account->league}}_font">x{{$account->count}}</span>@endif
                     </div>
                     <div class="seller_info">
-                        @if(!$profile_page) <a class="user" href="{{action('UserProfileController@show',$account->user)}}">- {{$account->user->name}}</a>@endif
+                        @if(!$profile_page) <a class="user pull-right" href="{{action('UserProfileController@show',$account->user)}}">- {{$account->user->name}}</a>@endif
                         @if($profile_page && Auth::id() == $user->id)
-                            <a class="btn btn-warning" href="{{action('AccountsController@edit',$account)}}">Edit</a>
+                            <div class="pull-right"><a class="btn btn-warning" href="{{action('AccountsController@edit',$account)}}">Edit</a>
                             {!! Form::open(['action' => ['AccountsController@destroy',$account], 'method'=>'DELETE']) !!}
                             <input type="submit" class="btn btn-danger" value="Delete"/>
-                            {!! Form::close() !!}
+                            {!! Form::close() !!}</div>
                         @endif
+                        <div class="clearfix"></div>
                     </div>
 
                 </div>

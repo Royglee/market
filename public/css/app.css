@@ -6703,12 +6703,20 @@ button.close {
   background-color: #e7e7e7;
   font-weight: bold;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
+  position: relative;
   border: solid #b8b9b9;
   border-width: 1px 0px 1px 0px;
 }
+.account_row .account_list_item_wrapper .account_list_item .title span.count {
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  right: 3px;
+  font-size: 16px;
+  font-weight: bold;
+}
 .account_row .account_list_item_wrapper .account_list_item .seller_info {
   padding: 5px;
-  text-align: right;
 }
 .account_row .account_list_item_wrapper .account_list_item .seller_info a {
   display: inline-block;
@@ -6758,6 +6766,30 @@ button.close {
 }
 .Challenger {
   background-color: #78e7de;
+}
+.Unranked_font {
+  color: #a0cbc6;
+}
+.Bronze_font {
+  color: #e9b58e;
+}
+.Silver_font {
+  color: #b3c4aa;
+}
+.Gold_font {
+  color: #ffd02b;
+}
+.Platinum_font {
+  color: #a0cbae;
+}
+.Diamond_font {
+  color: #99bce3;
+}
+.Master_font {
+  color: #84d2c0;
+}
+.Challenger_font {
+  color: #4ddfd3;
 }
 .check .notActive {
   color: #3276b1;
