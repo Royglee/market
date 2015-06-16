@@ -15,7 +15,7 @@
       display: block;
       text-decoration: none;
       color: #333333;
-
+      cursor: pointer;
       &:hover{
         .z-depth(2);
       }
@@ -60,6 +60,16 @@
       .seller_info{
         padding: 5px;
         text-align: right;
+        a{
+          display: inline-block;
+          &.user{
+            font-weight: bold;
+            text-decoration: none;
+          }
+        }
+        form{
+          display: inline-block;
+        }
       }
     }
   }

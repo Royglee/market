@@ -32,8 +32,13 @@ post('accounts/store','AccountsController@store');
 
 get('accounts/{account}/edit','AccountsController@edit');
 patch('accounts/{account}','AccountsController@update');
+delete('accounts/{account}','AccountsController@destroy');
 
 get('accounts/{account}', 'AccountsController@show');
+
+get('user/{user}', 'UserProfileController@show');
+
+
 
 
 Route::controllers([

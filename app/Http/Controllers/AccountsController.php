@@ -103,15 +103,17 @@ class AccountsController extends Controller {
         return redirect()->action('AccountsController@index');
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Account $account
+     * @return Response
+     * @internal param int $id
+     */
+	public function destroy(Account $account)
 	{
-		//
+		$account->delete();
+        return back();
 	}
 
 }

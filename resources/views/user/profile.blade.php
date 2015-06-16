@@ -1,10 +1,10 @@
 @extends('app')
-
 @section('content')
-<div class="container">
-           @include('accounts/partials/_accountlist', ['accounts' => $accounts, 'profile_page'=>false])
-</div>
-@endsection
+    <div class="container">
+        <h1>{{$user->name}}'s Accounts</h1>
+        @include('accounts/partials/_accountlist', ['accounts' => $accounts, 'profile_page'=>true, 'user'=>$user])
+    </div>
+    @endsection
 
 @section('scripts')
     <script>

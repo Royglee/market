@@ -5,7 +5,7 @@
         <div class="row"> <div class="col-xs-12">
                 @include('accounts/partials/_errors')
             </div></div>
-        {!! Form::model($account, ['action' =>['AccountsController@update', $account['id']], 'method' => 'PATCH', 'role'=>'form']) !!}
+        {!! Form::model($account, ['action' =>['AccountsController@update', $account['id']], 'method' => 'PATCH']) !!}
         @include('accounts/partials/_step1',['input'=>$account])
         @include('accounts/partials/_step2',['input'=>$account])
         @include('accounts/partials/_step3',['input'=>$account])

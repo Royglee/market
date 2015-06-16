@@ -6664,6 +6664,7 @@ button.close {
   display: block;
   text-decoration: none;
   color: #333333;
+  cursor: pointer;
 }
 .account_row .account_list_item_wrapper .account_list_item:hover {
   box-shadow: 0 8px 17px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
@@ -6708,6 +6709,16 @@ button.close {
 .account_row .account_list_item_wrapper .account_list_item .seller_info {
   padding: 5px;
   text-align: right;
+}
+.account_row .account_list_item_wrapper .account_list_item .seller_info a {
+  display: inline-block;
+}
+.account_row .account_list_item_wrapper .account_list_item .seller_info a.user {
+  font-weight: bold;
+  text-decoration: none;
+}
+.account_row .account_list_item_wrapper .account_list_item .seller_info form {
+  display: inline-block;
 }
 .price {
   background: url('../img/price.png') no-repeat -29px 0;
