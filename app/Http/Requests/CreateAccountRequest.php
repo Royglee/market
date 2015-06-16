@@ -46,8 +46,20 @@ class CreateAccountRequest extends Request
     public function messages()
     {
         return [
-            //'has_email.required' => 'Origial E-mail',
-            'count.required_if' => 'You have to set the number of accounts in stock, if you want to sell more.',
+            'has_email.required' => 'Please specify, whether you have the original e-mail to the account(s).',
+            'countq.required' => 'Please specify the amount of account(s) to sell.',
+            'count.required_if' => 'Please set the number of accounts in stock, if you want to sell more.',
+            'first_owner.required' => 'Please specify whether you are the first owner of the account(s).',
+            'duration.required' => 'Please choose a duration for your account(s)to be available on our website.',
+            'delivery.required' => 'Please choose a delivery time for your account(s).',
+            'title.required' => 'Please set the title for your account(s)',
+            'server.required' => 'Please choose a server for your account(s)',
+            'league.required' => 'Please choose a league for your account(s)',
+            'division.required' => 'Please choose a division for your account(s)',
+            'champions.required' => 'Please set the number of champions for your account(s)',
+            'skins.required' => 'Please set the number of skins for your account(s)',
+            'price.required' => 'Please set a price for your account(s)',
+            'body.required' => 'Please add a description for your account(s)',
         ];
     }
 
