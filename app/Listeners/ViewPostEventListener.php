@@ -26,6 +26,5 @@ class ViewPostEventListener
     public function handle(ViewPostEvent $event)
     {
         $event->account->increment('view_count');
-        //$event->account['view_count'] += 1;
     }
 }
