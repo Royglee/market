@@ -14,6 +14,7 @@ class AccountsController extends Controller {
     function __construct()
     {
         $this->middleware('auth',['only' => 'create']);
+        $this->middleware('account.owner',['only' => ['edit','update','destroy']]);
     }
 
     /**
