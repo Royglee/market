@@ -6725,6 +6725,10 @@ button.close {
   font-weight: bold;
   text-decoration: none;
 }
+.account_row .account_list_item_wrapper .account_list_item .seller_info span.glyphicon {
+  position: relative;
+  top: 2px;
+}
 .account_row .account_list_item_wrapper .account_list_item .seller_info form {
   display: inline-block;
 }

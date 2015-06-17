@@ -35,6 +35,7 @@ class AccountsTableSeeder extends Seeder {
                 'champions'=>$faker->numberBetween(20,160),
                 'skins'=>$faker->numberBetween(0,200),
                 'body'=>$faker->text,
+                'view_count'=>$faker->numberBetween(0,200),
                 'user_id'=> $faker->randomElement($userIds),
             ]);
         }

@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property  user_id
+ * @property int id
  */
 class Account extends Model
 {

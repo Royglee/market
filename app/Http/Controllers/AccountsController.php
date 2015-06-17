@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Account;
-use App\Events\ViewPostEvent;
+use App\Events\ViewAccountEvent;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAccountRequest;
@@ -74,7 +74,7 @@ class AccountsController extends Controller {
      */
 	public function show(Account $account)
 	{
-        Event::fire(new ViewPostEvent($account));
+        Event::fire(new ViewAccountEvent($account));
         return view('accounts.show', compact('account'));
 	}
 

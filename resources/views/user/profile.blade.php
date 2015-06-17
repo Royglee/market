@@ -8,8 +8,11 @@
 
 @section('scripts')
     <script>
-        $( ".account_list_item" ).click(function() {
-            $(location).attr('href',$(this).data('href'));
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+            $( ".account_list_item" ).click(function() {
+                $(location).attr('href',$(this).data('href'));
+            });
         });
     </script>
 

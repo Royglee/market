@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\ViewPostEvent' => [
-            'App\Listeners\ViewPostEventListener',
+        'App\Events\ViewAccountEvent' => [
+            'App\Listeners\ViewAccountEventListener',
         ],
     ];
 

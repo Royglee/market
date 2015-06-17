@@ -20,6 +20,10 @@
                         @if($account->count)<span class="count {{$account->league}}_font">x{{$account->count}}</span>@endif
                     </div>
                     <div class="seller_info">
+                        <div class="pull-left" data-toggle="tooltip" data-placement="top" title="Number of views">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            <span>{{$account->view_count}}</span>
+                        </div>
                         @if(!$profile_page) <a class="user pull-right" href="{{action('UserProfileController@show',$account->user)}}">- {{$account->user->name}}</a>@endif
                         @if($profile_page && Auth::id() == $user->id)
                             <div class="pull-right"><a class="btn btn-warning" href="{{action('AccountsController@edit',$account)}}">Edit</a>

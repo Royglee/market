@@ -7,7 +7,7 @@ use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ViewPostEvent extends Event
+class ViewAccountEvent extends Event
 {
     use SerializesModels;
     public $account;
