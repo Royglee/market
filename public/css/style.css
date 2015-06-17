@@ -6292,6 +6292,8 @@ button.close {
 }
 .account_row .account_list_item_wrapper .account_list_item .seller_info {
   padding: 5px;
+  position: relative;
+  min-height: 25px;
 }
 .account_row .account_list_item_wrapper .account_list_item .seller_info a {
   display: inline-block;

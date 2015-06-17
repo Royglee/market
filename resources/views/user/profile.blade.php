@@ -13,6 +13,11 @@
             $( ".account_list_item" ).click(function() {
                 $(location).attr('href',$(this).data('href'));
             });
+            $('div.view').css({
+                'position' : 'absolute',
+                'top' : '50%',
+                'margin-top' : -$('div.view').height()/2
+            });
         });
     </script>
 
