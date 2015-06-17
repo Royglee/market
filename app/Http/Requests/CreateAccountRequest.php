@@ -59,7 +59,7 @@ class CreateAccountRequest extends Request
             'duration.in' => 'Please choose a duration for your account(s)to be available on our website from the list below.',
             'delivery.required' => 'Please choose a delivery time for your account(s).',
             'title.required' => 'Please set the title for your account(s).',
-            'title.max' => 'The title for your account(s) has to be between 3 and 255 characters.',
+            'title.min' => 'The title for your account(s) has to be between 3 and 255 characters.',
             'title.max' => 'The title for your account(s) has to be between 3 and 255 characters.',
             'server.required' => 'Please choose a server for your account(s).',
             'server.in' => 'Please choose a valid server for your account(s).',
