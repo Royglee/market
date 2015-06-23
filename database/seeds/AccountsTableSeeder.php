@@ -13,7 +13,7 @@ class AccountsTableSeeder extends Seeder {
 
         foreach(range(1, 100) as $index)
         {
-            $countq = $faker->boolean(10);
+            $countq = $faker->boolean(40);
             if($countq){
                 $count = $faker->numberBetween(2,20);
             }

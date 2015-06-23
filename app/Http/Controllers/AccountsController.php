@@ -5,11 +5,13 @@ use App\Events\ViewAccountEvent;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAccountRequest;
+use App\Repositories\AccountRepository;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Event;
+use Illuminate\Support\Facades\Input;
 
 
 class AccountsController extends Controller {
@@ -22,22 +24,27 @@ class AccountsController extends Controller {
     /**
      * Display a listing of the resource.
      *
-     * @param Account $accounts
+     * @param Account|AccountRepository $accounts
      * @return Response
      * @internal param Account $var
      * @internal param Account $accounts
      */
-	public function index(Account $accounts)
+	public function index(AccountRepository $accounts)
 	{
-       /* $accounts = Cache::remember('account', 5, function() use ($accounts)
-        {
-            return $accounts->with('user')->get();
-        });*/
-        //Cache::forget('account');
-        $accounts= $accounts->withUser(['name'])->orderBy('created_at', 'desc')->get();
-
-        return view('accounts.index', compact('accounts'));
+        $servers = $accounts->servers();
+        $leagues = $accounts->leagues();
+        $accounts = $accounts->getAccountsWithUsers(['name']);
+        return view('accounts.index', compact('accounts','servers','leagues'));
 	}
+
+    public function filter(AccountRepository $accounts, Request $request)
+    {
+        $input = $request->all();
+        $servers = $accounts->servers();
+        $leagues = $accounts->leagues();
+        $accounts = $accounts->getFilteredAccountsWithUsers($input, ['name']);
+        return view('accounts.index', compact('accounts','input','servers','leagues'));
+    }
 
 	/**
 	 * Show the form for creating a new resource.
