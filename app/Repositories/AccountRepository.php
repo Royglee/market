@@ -19,7 +19,7 @@ class AccountRepository {
         return $this->account->withUser($user_colums)->orderBy($orderBy, 'desc')->get();
 
     }
-    public function getFilteredAccountsWithUsers( Array $input, Array $user_colums=[], $orderBy="created_at")
+    public function getFilteredAccountsWithUsers( Array $input, Array $user_colums=[])
     {
         $accounts= $this->account->withUser($user_colums);
 
@@ -31,7 +31,22 @@ class AccountRepository {
             $accounts= $accounts->whereIn('server', $input['server']);
         }
 
-        $accounts=  $accounts->orderBy($orderBy, 'desc');
+        if (isset($input['order'])) {
+            switch ($input['order']) {
+                case 'created_at':
+                    $accounts=  $accounts->orderBy('created_at', 'desc');
+                    break;
+                case 'view_count':
+                    $accounts=  $accounts->orderBy('view_count', 'desc');
+                    break;
+                case 'league':
+                    $accounts=  $accounts->orderByRaw('FIELD(league, "' . implode('", "', $this->leagues()) . '") DESC');
+                    break;
+            }
+        }
+        else{
+            $accounts=  $accounts->orderBy('created_at', 'desc');
+        }
 
         return $accounts->get();
 

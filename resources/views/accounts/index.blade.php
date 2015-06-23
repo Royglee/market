@@ -16,6 +16,11 @@
                         <option value='{{$league}}' @if(isset($input['league']) && in_array($league,$input['league'])) selected @endif>{{$league}}</option>
                     @endforeach
                 </select>
+                <select id="order-select" name="order" id="order" class="">
+                    <option value="created_at" @if(isset($input['order'])&& $input['order']=='created_at')selected @endif>Newest first</option>
+                    <option value="view_count" @if(isset($input['order'])&& $input['order']=='view_count')selected @endif>Most viewed first</option>
+                    <option value="league" @if(isset($input['order'])&& $input['order']=='league')selected @endif>Highest division first</option>
+                </select>
                 <input type="submit"/>
                 {!! Form::close() !!}
             </div>
@@ -40,6 +45,7 @@
                 includeSelectAllOption: true,
                 nonSelectedText: 'Select division(s)!'
             });
+            $('#order-select').multiselect();
         });
     </script>
 
