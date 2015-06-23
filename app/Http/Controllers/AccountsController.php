@@ -25,26 +25,19 @@ class AccountsController extends Controller {
      * Display a listing of the resource.
      *
      * @param Account|AccountRepository $accounts
+     * @param Request $request
      * @return Response
      * @internal param Account $var
      * @internal param Account $accounts
      */
-	public function index(AccountRepository $accounts)
+	public function index(AccountRepository $accounts,  Request $request)
 	{
-        $servers = $accounts->servers();
-        $leagues = $accounts->leagues();
-        $accounts = $accounts->getAccountsWithUsers(['name']);
-        return view('accounts.index', compact('accounts','servers','leagues'));
-	}
-
-    public function filter(AccountRepository $accounts, Request $request)
-    {
         $input = $request->all();
         $servers = $accounts->servers();
         $leagues = $accounts->leagues();
         $accounts = $accounts->getFilteredAccountsWithUsers($input, ['name']);
         return view('accounts.index', compact('accounts','input','servers','leagues'));
-    }
+	}
 
 	/**
 	 * Show the form for creating a new resource.

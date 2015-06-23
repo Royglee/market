@@ -26,7 +26,6 @@ Route::get('/', 'AccountsController@index');
 Route::get('home', 'HomeController@index');
 
 get('accounts', 'AccountsController@index');
-post('accounts', 'AccountsController@filter');
 
 get('accounts/create','AccountsController@create');
 post('accounts/store','AccountsController@store');

@@ -40,12 +40,35 @@ class AccountRepository {
                     $accounts=  $accounts->orderBy('view_count', 'desc');
                     break;
                 case 'league':
-                    $accounts=  $accounts->orderByRaw('FIELD(league, "' . implode('", "', $this->leagues()) . '") DESC');
+                    $accounts=  $accounts->orderByRaw('FIELD(league, "' . implode('", "', $this->leagues()) . '") DESC, division ASC');
+                    break;
+                case 'league_asc':
+                    $accounts=  $accounts->orderByRaw('FIELD(league, "' . implode('", "', $this->leagues()) . '") ASC, division DESC');
+                    break;
+                case 'champions':
+                    $accounts=  $accounts->orderBy('champions', 'desc');
+                    break;
+                case 'skins':
+                    $accounts=  $accounts->orderBy('skins', 'desc');
+                    break;
+                case 'price':
+                    $accounts=  $accounts->orderBy('price', 'desc');
+                    break;
+                case 'price_asc':
+                    $accounts=  $accounts->orderBy('price', 'asc');
                     break;
             }
         }
         else{
             $accounts=  $accounts->orderBy('created_at', 'desc');
+        }
+
+        if (isset($input['champion'])) {
+            $accounts= $accounts->where('champions','>' ,$input['champion']);
+        }
+
+        if (isset($input['skin'])) {
+            $accounts= $accounts->where('skins','>' ,$input['skin']);
         }
 
         return $accounts->get();
