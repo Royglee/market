@@ -63,11 +63,11 @@ class AccountRepository {
             $accounts=  $accounts->orderBy('created_at', 'desc');
         }
 
-        if (isset($input['champion'])) {
+        if (isset($input['champion']) && $input['champion'] > 0 ) {
             $accounts= $accounts->where('champions','>' ,$input['champion']);
         }
 
-        if (isset($input['skin'])) {
+        if (isset($input['skin']) && $input['skin'] > 0) {
             $accounts= $accounts->where('skins','>' ,$input['skin']);
         }
 
