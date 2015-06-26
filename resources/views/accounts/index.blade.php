@@ -6,7 +6,7 @@
         <div class="col-xs-12" >
             <div style="margin: 15px">
                 {!! Form::open(['action' => 'AccountsController@index', 'method' => 'get', 'class'=>'text-center']) !!}
-                <div class="btn-group" role="group" aria-label="...">
+                <div id="filter-accounts" class="btn-group hidden" role="group" aria-label="filter">
                     <button type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         Filter
@@ -62,6 +62,8 @@
             $( ".account_list_item" ).click(function() {
                 $(location).attr('href',$(this).data('href'));
             });
+
+            //Filter Init
             $('#server-select').multiselect({
                 includeSelectAllOption: true,
                 buttonText: function(options, select) {
@@ -111,6 +113,7 @@
             $('#order-select').multiselect();
             $('#champion-select').multiselect();
             $('#skin-select').multiselect();
+            $("#filter-accounts").removeClass('hidden');
         });
     </script>
 

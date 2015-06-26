@@ -65,11 +65,13 @@ class BBCode {
             ],
             'link' => [
                 'pattern' => '/\[url\](.*?)\[\/url\]/s',
-                'replace' => '<a href="$1">$1</a>',
+                //'replace' => '<a href="$1">$1</a>',
+                'replace' => 'Url not allowed',
             ],
             'namedlink' => [
                 'pattern' => '/\[url\=(.*?)\](.*?)\[\/url\]/s',
-                'replace' => '<a href="$1">$2</a>',
+                // 'replace' => '<a href="$1">$2</a>',
+                'replace' => 'Url not allowed',
             ],
             'image' => [
                 'pattern' => '/\[img\](.*?)\[\/img\]/s',
