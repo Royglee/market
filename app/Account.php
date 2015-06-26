@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property  user_id
  * @property int id
+ * @property mixed body
  */
 class Account extends Model
 {

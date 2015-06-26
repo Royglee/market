@@ -113,14 +113,8 @@
             $('#skin-select').multiselect();
         });
     </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#example-buttonText').multiselect({
 
-            });
-        });
-    </script>
-    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
+    <script type="text/javascript" src="../js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap-multiselect.css" type="text/css"/>
 
 @endsection

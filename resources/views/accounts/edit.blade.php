@@ -17,7 +17,6 @@
 @section('scripts')
     <script src="{{asset('js/vue.js')}}"></script>
     <script src="{{asset('js/create_steps.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('css/default/wbbtheme.css')}}" />
-    <script src="{{asset('js/jquery.wysibb.js')}}"></script>
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 
 @endsection

@@ -143,6 +143,7 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Golonka\BBCode\BBCodeParserServiceProvider::class,
 
     ],
 
@@ -193,6 +194,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'Html'      => Illuminate\Html\HtmlFacade::class,
+        'BBCode'    => Golonka\BBCode\Facades\BBCodeParser::class,
 
     ],
 

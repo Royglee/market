@@ -150,9 +150,17 @@ create = new Vue({
 
 
 $(document).ready(function() {
-    $("#editor").wysibb({
-        minheight:200
-    });
+/*    $("#editor").wysibb({
+     minheight:200
+     });*/
+   /* $("#editor").sceditor({
+        plugins: "bbcode",
+        style: "../bbcode_dev/jquery.sceditor.default.css",
+        width: "auto",
+        height: "400px",
+        resizeWidth:false,
+        emoticonsRoot:'../img/'
+    });*/
     $('.check a').on('click', function(){
         var sel = $(this).data('title');
         var tog = $(this).data('toggle');

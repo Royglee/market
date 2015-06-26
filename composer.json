@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "illuminate/html": "^5.0",
         "ext-curl": "*",
-        "angelleye/paypal-php-library": "2.0.*"
+        "angelleye/paypal-php-library": "2.0.*",
+        "golonka/bbcodeparser": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "1.6.x-dev",

@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAccountRequest;
 use App\Repositories\AccountRepository;
+use App\Services\BBCode;
+use Golonka\BBCode\BBCodeParser;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,14 +69,13 @@ class AccountsController extends Controller {
      * Display the specified resource.
      *
      * @param Account $account
+     * @param BBCode $bbcode
      * @return Response
-     * @internal param $id
-     * @internal param $account
-     * @internal param int $id
      */
-	public function show(Account $account)
+	public function show(Account $account, BBCode $bbcode)
 	{
         Event::fire(new ViewAccountEvent($account));
+        $account->body = $bbcode->parse($account->body);
         return view('accounts.show', compact('account'));
 	}
 
