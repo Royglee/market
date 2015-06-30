@@ -58,7 +58,6 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
             $( ".account_list_item" ).click(function() {
                 $(location).attr('href',$(this).data('href'));
             });
