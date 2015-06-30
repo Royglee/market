@@ -10,12 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/config',function(){
-    $paypal = new \App\Services\PaymentService();
-    $paypal->sendPayment();
-    $paykey = $paypal->setPaymentOptions();
-    return view('paypal',compact('paykey'));
-});
+
 Route::get('/success', function(){
     return view('succes');
 });
@@ -25,22 +20,23 @@ Route::get('/success', function(){
 Route::get('/', 'AccountsController@index');
 Route::get('home', 'HomeController@index');
 
+//-- Account Resource routes --//
 get('accounts', 'AccountsController@index');
-
 get('accounts/create','AccountsController@create');
 post('accounts/store','AccountsController@store');
-
+get('accounts/{account}', 'AccountsController@show');
 get('accounts/{account}/edit','AccountsController@edit');
 patch('accounts/{account}','AccountsController@update');
 delete('accounts/{account}','AccountsController@destroy');
 
-get('accounts/{account}', 'AccountsController@show');
-
+//-- User routes --//
 get('user/{user}', 'UserProfileController@show');
 
+//-- PayPal routes --//
+get('api/order/{account}','PaypalController@pay');
 
 
-
+//-- Auth routes --//
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',

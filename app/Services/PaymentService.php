@@ -7,6 +7,8 @@
  */
 namespace App\Services;
 use angelleye\PayPal\Adaptive;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class PaymentService {
@@ -20,24 +22,22 @@ class PaymentService {
     protected $AccountIdentifierFields;
 
     //Adaptive Pay visszatérési érték (fontosabbak)
-    protected $PayKey;
-    protected $RedirectURL;
-    protected $PayPalResult_Pay; // Errors,Ack,Build,CorrelationID,Timestamp,PayKey,PaymentExecStatus,RedirectURL,XMLRequest
-    protected $PayPalResult_SetPaymentOptions;
+    public $PayKey;
+    public $RedirectURL;
+    public $PayPalResult_Pay; // Errors,Ack,Build,CorrelationID,Timestamp,PayKey,PaymentExecStatus,RedirectURL,XMLRequest
+    public $PayPalResult_SetPaymentOptions;
 
-    function __construct()
+    protected $buyer;
+    protected $account;
+
+    function __construct(Request $request)
     {
         $this->PayPal = new Adaptive(config('paypal'));
-        $this->PayPal['IPAddress']=$_SERVER['REMOTE_ADDR'];
-        $this->PayRequestFields();
-        $this->ClientDetailsFields();
-        $this->Receivers = array();
-        $this->addReceiver();
-        $this->SenderIdentifierFields();
-        $this->AccountIdentifierFields();
+        $this->buyer = $request->user();
     }
 
-    public function PayRequestFields(){
+    protected function initFields()
+    {
         $this->PayRequestFields = array(
             'ActionType' => 'PAY_PRIMARY', 								// Required.  Whether the request pays the receiver or whether the request is set up to create a payment request, but not fulfill the payment until the ExecutePayment is called.  Values are:  PAY, CREATE, PAY_PRIMARY
             'CancelURL' => url('/success'), 									// Required.  The URL to which the sender's browser is redirected if the sender cancels the approval for the payment after logging in to paypal.com.  1024 char max.
@@ -53,19 +53,25 @@ class PaymentService {
             'TrackingID' => ''	,								// Unique ID that you specify to track the payment.  127 char max.
 
         );
-    }
-    public function ClientDetailsFields(){
         $this->ClientDetailsFields = array(
-            'CustomerID' => '', 								// Your ID for the sender  127 char max.
+            'CustomerID' =>  $this->buyer->id, 								// Your ID for the sender  127 char max.
             'CustomerType' => '', 								// Your ID of the type of customer.  127 char max.
             'GeoLocation' => '', 								// Sender's geographic location
             'Model' => '', 										// A sub-identification of the application.  127 char max.
             'PartnerName' => ''									// Your organization's name or ID
         );
+        $this->SenderIdentifierFields = array(
+            'UseCredentials' => false						// If TRUE, use credentials to identify the sender.  Default is false.
+        );
+        $this->AccountIdentifierFields = array(
+            'Email' => $this->buyer->email, 								// Sender's email address.  127 char max.
+            'Phone' => array('CountryCode' => '', 'PhoneNumber' => '', 'Extension' => '')								// Sender's phone number.  Numbers only.
+        );
     }
-    public function addReceiver(){
+    protected function setReceiver(){
+        $this->Receivers = [];
         $Receiver = array(
-            'Amount' => '500.00', 											// Required.  Amount to be paid to the receiver.
+            'Amount' => $this->account->price, 											// Required.  Amount to be paid to the receiver.
             'Email' => 'marcellrosta-facilitator@gmail.com', 												// Receiver's email address. 127 char max.
             'InvoiceID' => '', 											// The invoice number for the payment.  127 char max.
             'PaymentType' => '', 										// Transaction type.  Values are:  GOODS, SERVICE, PERSONAL, CASHADVANCE, DIGITALGOODS
@@ -77,7 +83,7 @@ class PaymentService {
         array_push($this->Receivers,$Receiver);
 
         $Receiver = array(
-            'Amount' => '50.00', 											// Required.  Amount to be paid to the receiver.
+            'Amount' => $this->account->price*0.9, 											// Required.  Amount to be paid to the receiver.
             'Email' => 'seller@accmarket.com', 												// Receiver's email address. 127 char max.
             'InvoiceID' => '', 											// The invoice number for the payment.  127 char max.
             'PaymentType' => '', 										// Transaction type.  Values are:  GOODS, SERVICE, PERSONAL, CASHADVANCE, DIGITALGOODS
@@ -87,32 +93,37 @@ class PaymentService {
             'AccountID' => '',
         );
         array_push($this->Receivers,$Receiver);
-    }
-    public function SenderIdentifierFields(){
-       $this->SenderIdentifierFields = array(
-            'UseCredentials' => false						// If TRUE, use credentials to identify the sender.  Default is false.
-        );
-    }
-    public function AccountIdentifierFields(){
-        $this->AccountIdentifierFields = array(
-            'Email' => '', 								// Sender's email address.  127 char max.
-            'Phone' => array('CountryCode' => '', 'PhoneNumber' => '', 'Extension' => '')								// Sender's phone number.  Numbers only.
-        );
-    }
 
-    public function sendPayment(){
-
-        $PayPalRequestData = array(
+        return $this;
+    }
+    protected function buildPayRequestData()
+    {
+       return array(
             'PayRequestFields' => $this->PayRequestFields,
             'ClientDetailsFields' => $this->ClientDetailsFields,
             'Receivers' => $this->Receivers,
             'SenderIdentifierFields' => $this->SenderIdentifierFields,
             'AccountIdentifierFields' => $this->AccountIdentifierFields,
         );
+    }
+
+    public function order($account)
+    {
+        $this->account = $account;
+        $this->initFields();
+        $this->setReceiver();
+        return $this;
+    }
+
+    public function sendPayment(){
+
+        $PayPalRequestData      = $this->buildPayRequestData();
         $this->PayPalResult_Pay = $this->PayPal->Pay($PayPalRequestData);
-        $this->PayKey=$this->PayPalResult_Pay['PayKey'];
-        $this->RedirectURL=$this->PayPalResult_Pay['RedirectURL'];
-        return $this->PayPalResult_Pay;
+
+        $this->PayKey      = $this->PayPalResult_Pay['PayKey'];
+        $this->RedirectURL = $this->PayPalResult_Pay['RedirectURL'];
+
+        return $this;
     }
 
     public function  setPaymentOptions(){
