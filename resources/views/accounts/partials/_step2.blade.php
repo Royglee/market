@@ -6,7 +6,7 @@
                 <div class="col-md-4 col-sm-6 account_list_item_wrapper ">
                     <a class="account_list_item @{{steps.step1.league}}">
 
-                        <div class="account_list_item_top" style="min-height:160px;background-image: url('/img/@{{ image }}')">
+                        <div class="account_list_item_top" style="min-height:160px;" v-style="background-image: 'url(/img/'+image+')'">
                             <div class="price" v-if="steps.step1.price > 0">
                                 $@{{steps.step1.price | splitLong 6}}
                             </div>

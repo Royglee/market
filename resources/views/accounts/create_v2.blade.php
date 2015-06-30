@@ -30,9 +30,9 @@
 @endsection
 
 @section('scripts')
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('js/vue.js')}}"></script>
     <script src="{{asset('js/create_steps.js')}}"></script>
-    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 
 
 
