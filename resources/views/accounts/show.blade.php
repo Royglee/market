@@ -17,10 +17,16 @@
                         <span>{{$account->created_at->addDays($account->duration)->diffForHumans()}}</span>
                     </div>
                 </div>
-                <button class="buynow_b pull-right">
-                    <div class="buynow">Buy Now</div>
+                <button class="buynow_b pull-right" id="buynow_button" data-href="{{action('PaypalController@pay',$account)}}">
+                    <div class="buynow">
+                        <span id="loading" class="glyphicon glyphicon-refresh hidden glyphicon-refresh-animate"></span>
+                        Buy Now</div>
                     <div class="buynow_p">${{$account->price}}</div>
                 </button>
+                <form id="paypalform" action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay" target="PPDGFrame" class="hidden">
+                    <input id="type" type="hidden" name="expType" value="light">
+                    <input id="paykey" type="hidden" name="paykey" value="">
+                </form>
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -48,3 +54,10 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
+    <script type="text/javascript">
+        var embeddedPPFlow1 = new PAYPAL.apps.DGFlow( {trigger : 'paypalform'});
+    </script>
+    @endsection

@@ -35,7 +35,6 @@ class PaymentService {
         $this->PayPal = new Adaptive(config('paypal'));
         $this->buyer = $request->user();
     }
-
     protected function initFields()
     {
         $this->PayRequestFields = array(
@@ -152,10 +151,10 @@ class PaymentService {
 
         $InvoiceItems = array();
         $InvoiceItem = array(
-            'Name' => 'Diamond Account', 								// Name of item.
-            'Identifier' => '12', 						// External reference to item or item ID.
-            'Price' => '500', 								// Total of line item.
-            'ItemPrice' => '500',							// Price of an individual item.
+            'Name' => $this->account->title, 								// Name of item.
+            'Identifier' => $this->account->id, 						// External reference to item or item ID.
+            'Price' => $this->account->price, 								// Total of line item.
+            'ItemPrice' => $this->account->price,							// Price of an individual item.
             'ItemCount' => '1'							// Item QTY
         );
         array_push($InvoiceItems,$InvoiceItem);

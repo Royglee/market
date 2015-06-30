@@ -60,7 +60,20 @@
   }
 }
 
+.glyphicon-refresh-animate {
+  -animation: spin .7s infinite linear;
+  -webkit-animation: spin2 .7s infinite linear;
+}
 
+@-webkit-keyframes spin2 {
+  from { -webkit-transform: rotate(0deg);}
+  to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg);}
+  to { transform: scale(1) rotate(360deg);}
+}
 
 .Unranked_title_font{color: darken(#c1ddda,50%);}
 .Bronze_title_font{color: darken(#f1d1b9,50%);}

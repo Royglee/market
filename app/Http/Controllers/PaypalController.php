@@ -14,11 +14,10 @@ class PaypalController extends Controller
 {
     public function pay(PaymentService $paypal, Account $account)
     {
-        dd(
-            $paypal
-            ->order($account)
-            ->sendPayment()
-            ->PayPalResult_Pay
-        );
+        return  $paypal
+                    ->order($account)
+                    ->sendPayment()
+                    ->setPaymentOptions()
+        ;
     }
 }

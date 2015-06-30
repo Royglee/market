@@ -18,4 +18,19 @@ $(document).ready(function(){
         $(' h1.dp_acc_title ').vAlign();
     });
     $('[data-toggle="tooltip"]').tooltip();
+
+   //Paypal Buy button
+    $('#buynow_button').click(function(e){
+        e.preventDefault();
+        var url = $(this).data('href');
+        var paypalForm = $('#paypalform');
+        var payKey = $('#paykey');
+        var Loading = $(this).find('#loading')
+        Loading.removeClass('hidden');
+        $.get( url, function( data ) {
+            payKey.val(data);
+            paypalForm.trigger('click').submit();
+            Loading.addClass('hidden');
+        });
+    });
 });
