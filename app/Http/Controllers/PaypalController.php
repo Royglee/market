@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PaypalController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth',['only' => 'pay']);
+    }
     public function pay(PaymentService $paypal, Account $account)
     {
         return  $paypal

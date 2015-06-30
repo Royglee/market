@@ -111,11 +111,15 @@ create = new Vue({
         var errorlist = $(' #errors ').text().split(' ');
         var isError = ($('#errors').data('error') > 0)? true : false;
         var firstError = "";
+        var firstInputError = "";
         if (isError) {
            if (firstError == "") {
                $.each(step1, function (index, value) {
                    if ($.inArray(value, errorlist) != -1) {
                        firstError="#step-1";
+                       if(firstInputError == ""){
+                           firstInputError = value;
+                       }
                    }
                });
            }
@@ -123,6 +127,9 @@ create = new Vue({
                 $.each(step2, function (index, value) {
                     if ($.inArray(value, errorlist) != -1) {
                         firstError="#step-2";
+                        if(firstInputError == ""){
+                            firstInputError = value;
+                        }
                     }
                 });
             }
@@ -132,6 +139,7 @@ create = new Vue({
 
 
             $(' ul.setup-panel a[href="'+firstError+'"] ').closest('li').click();
+            $('input[name="'+firstInputError+'"]').focus();
         }
 
         var intRegex =  /^[/.]accounts[/.][0-9]+[/.]edit+$/g;

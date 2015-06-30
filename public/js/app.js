@@ -26,10 +26,14 @@ $(document).ready(function(){
         var paypalForm = $('#paypalform');
         var payKey = $('#paykey');
         var Loading = $(this).find('#loading')
+
         Loading.removeClass('hidden');
-        $.get( url, function( data ) {
+        $.get( url, function( data, status ) {
             payKey.val(data);
             paypalForm.trigger('click').submit();
+        }).fail(function(data, status, xhr) {
+            if (data.status == 401) {alert('You have to log in first')}
+        }).always(function() {
             Loading.addClass('hidden');
         });
     });
