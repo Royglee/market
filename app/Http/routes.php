@@ -34,6 +34,7 @@ get('user/{user}', 'UserProfileController@show');
 
 //-- PayPal routes --//
 get('api/order/{account}','PaypalController@pay');
+post('api/ipn/{user}/{account}','PaypalController@ipn');
 
 
 //-- Auth routes --//

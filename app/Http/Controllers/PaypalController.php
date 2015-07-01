@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Services\PaymentService;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+
 
 class PaypalController extends Controller
 {
@@ -21,7 +25,20 @@ class PaypalController extends Controller
         return  $paypal
                     ->order($account)
                     ->sendPayment()
-                    ->setPaymentOptions()
+                    ->setPaymentOptions() //PayKey
         ;
+    }
+
+    public function ipn( User $user, Account $account, PaymentService $paypal)
+    {
+        if($paypal->isIPNVerified()){
+            Log::info("VERIFIED");
+            Log::info($paypal->ipnMessage());
+            Log::info($account);
+            Log::info($user);
+        } else {
+            Log::info("INVALID");
+        }
+
     }
 }

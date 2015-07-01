@@ -42,7 +42,7 @@ class PaymentService {
             'CancelURL' => url('/success'), 									// Required.  The URL to which the sender's browser is redirected if the sender cancels the approval for the payment after logging in to paypal.com.  1024 char max.
             'CurrencyCode' => 'USD', 								// Required.  3 character currency code.
             'FeesPayer' => 'EACHRECEIVER', 									// The payer of the fees.  Values are:  SENDER, PRIMARYRECEIVER, EACHRECEIVER, SECONDARYONLY
-            'IPNNotificationURL' => '', 						// The URL to which you want all IPN messages for this payment to be sent.  1024 char max.
+            'IPNNotificationURL' => 'http://195.38.101.10:8000/api/ipn/'.$this->buyer->id.'/'.$this->account->id, 						// The URL to which you want all IPN messages for this payment to be sent.  1024 char max.
             'Memo' => '', 										// A note associated with the payment (text, not HTML).  1000 char max
             'Pin' => '', 										// The sener's personal id number, which was specified when the sender signed up for the preapproval
             'PreapprovalKey' => '', 							// The key associated with a preapproval for this payment.  The preapproval is required if this is a preapproved payment.
@@ -138,11 +138,11 @@ class PaymentService {
             'BusinessName' => ''					// The business name to display.  128 char max.
         );
 
-// Begin loop to populate receiver options.
+        // Begin loop to populate receiver options.
         $ReceiverOptions = array();
         $ReceiverOption = array(
             'Description' => '', 					// A description you want to associate with the payment.  1000 char max.
-            'CustomID' => '' 						// An external reference number you want to associate with the payment.  1000 char max.
+            'CustomID' => '1' 						// An external reference number you want to associate with the payment.  1000 char max.
         );
         $InvoiceData = array(
             'TotalTax' => '', 							// Total tax associated with the payment.
@@ -166,7 +166,7 @@ class PaymentService {
         $ReceiverOption['InvoiceItems'] = $InvoiceItems;
         $ReceiverOption['ReceiverIdentifier'] = $ReceiverIdentifier;
         array_push($ReceiverOptions,$ReceiverOption);
-// End receiver options loop
+        // End receiver options loop
 
         $PayPalRequestData = array(
             'SPOFields' => $SPOFields,
@@ -174,9 +174,61 @@ class PaymentService {
             'ReceiverOptions' => $ReceiverOptions,
         );
 
-// Pass data into class for processing with PayPal and load the response array into PayPalResult_SetPaymentOptions
+        // Pass data into class for processing with PayPal and load the response array into PayPalResult_SetPaymentOptions
         $this->PayPalResult_SetPaymentOptions=$this->PayPal->SetPaymentOptions($PayPalRequestData);
         //dd('Adaptive Pay API Call Result',$this->PayPalResult_Pay,'SetPaymentOptions API Call Result',  $this->PayPalResult_SetPaymentOptions);
         return $this->PayPalResult_Pay['PayKey'];
+    }
+
+    public function ipnMessage($decode = false)
+    {
+        $raw_post_data= file_get_contents('php://input');
+        $raw_post_array = explode('&', $raw_post_data);
+        $myPost = array();
+        foreach ($raw_post_array as $keyval) {
+            $keyval = explode ('=', $keyval);
+            if (count($keyval) == 2)
+                $myPost[$keyval[0]] = urldecode($keyval[1]);
+        }
+        return $myPost;
+    }
+    public function isIPNVerified()
+    {
+        $IPN_url = config('paypal')['Sandbox']? 'https://www.sandbox.paypal.com/cgi-bin/webscr':
+                                                'https://www.paypal.com/cgi-bin/webscr';
+
+        $myPost = $this->ipnMessage();
+        $req = 'cmd=_notify-validate';
+        if(function_exists('get_magic_quotes_gpc')) {
+            $get_magic_quotes_exists = true;
+        }
+        foreach ($myPost as $key => $value) {
+            if($get_magic_quotes_exists == true && get_magic_quotes_gpc() == 1) {
+                $value = urlencode(stripslashes($value));
+            } else {
+                $value = urlencode($value);
+            }
+            $req .= "&$key=$value";
+        }
+        $ch = curl_init($IPN_url);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
+        if( !($res = curl_exec($ch)) ) {
+            // error_log("Got " . curl_error($ch) . " when processing IPN data");
+            curl_close($ch);
+            exit;
+        }
+        curl_close($ch);
+        if (strcmp ($res, "VERIFIED") == 0) {
+            return true;
+        } else if (strcmp ($res, "INVALID") == 0) {
+            return false;
+        }
     }
   }

@@ -144,7 +144,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Golonka\BBCode\BBCodeParserServiceProvider::class,
-
     ],
 
     /*
