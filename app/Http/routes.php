@@ -29,6 +29,8 @@ get('accounts/{account}/edit','AccountsController@edit');
 patch('accounts/{account}','AccountsController@update');
 delete('accounts/{account}','AccountsController@destroy');
 
+get('accounts/{accountRep}/sell','AccountsController@sell');
+
 //-- User routes --//
 get('user/{user}', 'UserProfileController@show');
 

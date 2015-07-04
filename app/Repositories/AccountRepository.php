@@ -3,7 +3,10 @@ namespace App\Repositories;
 
 
 use App\Account;
+use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Faker\Factory as Faker;
 
 class AccountRepository {
 
@@ -85,4 +88,26 @@ class AccountRepository {
         return ['Unranked','Bronze','Silver','Gold','Platinum','Diamond','Master','Challenger'];
     }
 
+    public function sold()
+    {   $faker = Faker::create();
+        $order = new Order();
+        if ($this->account->count > 1)
+        {
+            $this->account->count-= 1;
+        }
+        else {
+            $this->account->sold = 1;
+        }
+        $this->account->save();
+
+        $order -> account_id = $this->account->id;
+        $order -> user_id = Auth::id();
+        $order->payKey = $faker ->lexify('??????????????????');
+        $order->save();
+
+        dd($order->all()->toArray());
+
+
+        return $this->account;
+    }
 }

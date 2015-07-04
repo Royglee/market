@@ -30,6 +30,7 @@ class CreateAccountsTable extends Migration {
             $table->integer('skins');
             $table->float('price');
             $table->text('body');
+            $table->boolean('sold')->default(0);;
             $table->integer('view_count')->default(0);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

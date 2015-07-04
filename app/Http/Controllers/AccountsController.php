@@ -120,4 +120,9 @@ class AccountsController extends Controller {
         return back();
 	}
 
+    public function sell(AccountRepository $account)
+    {
+        $account->sold();
+    }
+
 }

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property  user_id
  * @property int id
  * @property mixed body
+ * @property mixed count
+ * @property bool sold
  */
 class Account extends Model
 {
@@ -39,6 +41,11 @@ class Account extends Model
         } else {
             $this->attributes['division'] = null;
         }
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
     }
 
 }

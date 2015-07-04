@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\AccountRepository;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Account;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,10 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot($router);
         $router->model('account', 'App\Account');
+        $router->bind('accountRep', function($id, $route){
+           return  new AccountRepository(Account::find($id));
+        });
+
         $router->model('user', 'App\User');
     }
 

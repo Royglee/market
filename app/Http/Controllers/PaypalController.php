@@ -22,11 +22,12 @@ class PaypalController extends Controller
     }
     public function pay(PaymentService $paypal, Account $account)
     {
-        return  $paypal
-                    ->order($account)
-                    ->sendPayment()
-                    ->setPaymentOptions() //PayKey
-        ;
+        if (!$account->sold) {
+            return $paypal
+                ->order($account)
+                ->sendPayment()
+                ->setPaymentOptions(); //PayKey
+        }
     }
 
     public function ipn( User $user, Account $account, PaymentService $paypal)

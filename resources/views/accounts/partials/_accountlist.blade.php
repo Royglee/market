@@ -17,7 +17,7 @@
                     </div>
                     <div class="title">
                         {{$account->title}}
-                        @if($account->count)<span class="count {{$account->league}}_font">x{{$account->count}}</span>@endif
+                        @if($account->count>1)<span class="count {{$account->league}}_font">x{{$account->count}}</span>@endif
                     </div>
                     <div class="seller_info">
                         <div class="pull-left view" data-toggle="tooltip" data-placement="top" title="Number of views">
