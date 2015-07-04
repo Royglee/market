@@ -43,9 +43,4 @@ class Account extends Model
         }
     }
 
-    public function orders()
-    {
-        return $this->hasMany('App\Order');
-    }
-
 }

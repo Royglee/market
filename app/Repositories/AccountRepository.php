@@ -4,13 +4,13 @@ namespace App\Repositories;
 
 use App\Account;
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Faker\Factory as Faker;
 
 class AccountRepository {
 
     protected $account;
+    protected $buyer;
 
     function __construct(Account $account)
     {
@@ -88,8 +88,8 @@ class AccountRepository {
         return ['Unranked','Bronze','Silver','Gold','Platinum','Diamond','Master','Challenger'];
     }
 
-    public function sold()
-    {   $faker = Faker::create();
+    public function sold($payKey)
+    {
         $order = new Order();
         if ($this->account->count > 1)
         {
@@ -101,13 +101,19 @@ class AccountRepository {
         $this->account->save();
 
         $order -> account_id = $this->account->id;
-        $order -> user_id = Auth::id();
-        $order->payKey = $faker ->lexify('??????????????????');
+        $order -> user_id =$this->buyer->id;
+        $order -> payKey = $payKey;
         $order->save();
 
         dd($order->all()->toArray());
 
 
-        return $this->account;
+        return $this;
+    }
+
+    public function buyer(User $buyer)
+    {
+        $this->buyer = $buyer;
+        return $this;
     }
 }

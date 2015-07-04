@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Order;
+use App\Repositories\AccountRepository;
 use App\Services\PaymentService;
 use App\User;
 use Illuminate\Http\Request;
@@ -30,13 +32,10 @@ class PaypalController extends Controller
         }
     }
 
-    public function ipn( User $user, Account $account, PaymentService $paypal)
+    public function ipn( User $user, AccountRepository $account, PaymentService $paypal)
     {
         if($paypal->isIPNVerified()){
-            Log::info("VERIFIED");
-            Log::info($paypal->ipnMessage());
-            Log::info($account);
-            Log::info($user);
+            $account->buyer($user)->sold($paypal->ipnMessage(true)['PayKey']);
         } else {
             Log::info("INVALID");
         }

@@ -17,8 +17,9 @@ class Order extends Model
 {
     public function buyer()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id','id');
     }
+
     public function account()
     {
         return $this->belongsTo('App\Account');

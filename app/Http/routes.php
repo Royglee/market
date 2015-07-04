@@ -11,6 +11,8 @@
 |
 */
 
+use App\Order;
+
 Route::get('/success', function(){
     return view('succes');
 });
@@ -29,14 +31,15 @@ get('accounts/{account}/edit','AccountsController@edit');
 patch('accounts/{account}','AccountsController@update');
 delete('accounts/{account}','AccountsController@destroy');
 
-get('accounts/{accountRep}/sell','AccountsController@sell');
-
 //-- User routes --//
 get('user/{user}', 'UserProfileController@show');
+get('orders', function(){
+    return view('test',['orders' => Order::orderBy('created_at','desc')->get()]);
+});
 
 //-- PayPal routes --//
 get('api/order/{account}','PaypalController@pay');
-post('api/ipn/{user}/{account}','PaypalController@ipn');
+post('api/ipn/{user}/{accountRep}','PaypalController@ipn');
 
 
 //-- Auth routes --//
