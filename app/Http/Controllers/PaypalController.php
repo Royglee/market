@@ -35,7 +35,7 @@ class PaypalController extends Controller
     public function ipn( User $user, AccountRepository $account, PaymentService $paypal)
     {
         if($paypal->isIPNVerified()){
-            $account->buyer($user)->sold($paypal->ipnMessage(true)['PayKey']);
+            $account->buyer($user)->sold($paypal->ipnMessage(true)['pay_key']);
         } else {
             Log::info("INVALID");
         }

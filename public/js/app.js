@@ -37,4 +37,8 @@ $(document).ready(function(){
             Loading.addClass('hidden');
         });
     });
+
+    if (window != top) {
+        top.location.replace(document.location);
+    }
 });
