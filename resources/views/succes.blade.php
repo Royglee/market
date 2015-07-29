@@ -9,7 +9,7 @@
 If this page does not redirect <a href="{{url('/')}}">Click Here</a>
 <script>
     //top.location.href='/accounts'
-    top.location.reload();
+   // top.location.reload();
 </script>
 </body>
 </html>
