@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
@@ -51,7 +52,15 @@ class UserProfileController extends Controller
     public function show(User $user)
     {
         $accounts= $user->accounts()->orderBy('created_at', 'desc')->get();
-        return view('user.profile', compact('accounts','user'));
+        if($user == Auth::user())
+        {
+            $orders = $user->orders;
+        }
+        else
+        {
+            $orders=null;
+        }
+        return view('user.profile', compact('accounts','user','orders'));
     }
 
     /**

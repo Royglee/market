@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('needAdmin')->default(0);
             $table->string('reason')->nullable();
 
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned(); //buyer
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('account_id')->unsigned();
             $table->foreign('account_id')->references('id')->on('accounts');

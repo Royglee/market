@@ -42,11 +42,11 @@ class PaymentService {
             'CancelURL' => url('/success'), 									// Required.  The URL to which the sender's browser is redirected if the sender cancels the approval for the payment after logging in to paypal.com.  1024 char max.
             'CurrencyCode' => 'USD', 								// Required.  3 character currency code.
             'FeesPayer' => 'EACHRECEIVER', 									// The payer of the fees.  Values are:  SENDER, PRIMARYRECEIVER, EACHRECEIVER, SECONDARYONLY
-            'IPNNotificationURL' => url('api/ipn').'/'.$this->buyer->id.'/'.$this->account->id, 						// The URL to which you want all IPN messages for this payment to be sent.  1024 char max.
+            'IPNNotificationURL' => env('PAYPAL_NOTIFYURL').'/api/ipn/'.$this->buyer->id.'/'.$this->account->id, 						// The URL to which you want all IPN messages for this payment to be sent.  1024 char max.
             'Memo' => '', 										// A note associated with the payment (text, not HTML).  1000 char max
             'Pin' => '', 										// The sener's personal id number, which was specified when the sender signed up for the preapproval
             'PreapprovalKey' => '', 							// The key associated with a preapproval for this payment.  The preapproval is required if this is a preapproved payment.
-            'ReturnURL' => url('/'), 									// Required.  The URL to which the sener's browser is redirected after approvaing a payment on paypal.com.  1024 char max.
+            'ReturnURL' => action('AccountsController@show', $this->account), 									// Required.  The URL to which the sener's browser is redirected after approvaing a payment on paypal.com.  1024 char max.
             'ReverseAllParallelPaymentsOnError' => false, 			// Whether to reverse paralel payments if an error occurs with a payment.  Values are:  TRUE, FALSE
             'SenderEmail' => '', 								// Sender's email address.  127 char max.
             'TrackingID' => ''	,								// Unique ID that you specify to track the payment.  127 char max.

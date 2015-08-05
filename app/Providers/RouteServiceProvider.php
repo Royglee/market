@@ -33,6 +33,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $router->model('user', 'App\User');
+        $router->model('order', 'App\Order');
     }
 
     /**

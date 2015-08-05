@@ -33,8 +33,10 @@ delete('accounts/{account}','AccountsController@destroy');
 
 //-- User routes --//
 get('user/{user}', 'UserProfileController@show');
-get('orders', function(){
-    return view('test',['orders' => Order::orderBy('created_at','desc')->get()]);
+
+//Order & Feedback
+get('orders/{order}',function($order){
+    return $order;
 });
 
 //-- PayPal routes --//
