@@ -12,6 +12,8 @@ use App\Account;
  * @property mixed payKey
  * @property mixed user_id
  * @property int account_id
+ * @property  seller_user_id
+ * @property \Illuminate\Database\Eloquent\Relations\BelongsTo seller_user_id
  */
 class Order extends Model
 {

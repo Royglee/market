@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed body
  * @property mixed count
  * @property bool sold
+ * @property mixed user_id
  */
 class Account extends Model
 {
@@ -20,6 +21,11 @@ class Account extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function seller_id()
+    {
+        return $this->user_id;
     }
 
     public function scopeWithUser($query, $array_columns = ["*"])

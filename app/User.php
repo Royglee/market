@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
  * @property mixed orders
+ * @property mixed sold_accounts
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -44,5 +45,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function orders()
     {
         return $this->hasMany('App\Order');
+    }
+    public function sold_accounts()
+    {
+        return $this->hasMany('App\Order','seller_user_id');
     }
 }

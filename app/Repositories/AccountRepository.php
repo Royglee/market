@@ -102,6 +102,7 @@ class AccountRepository {
 
         $order -> account_id = $this->account->id;
         $order -> user_id =$this->buyer->id;
+        $order -> seller_user_id = $this->account->seller_id();
         $order -> payKey = $payKey;
         $order->save();
 

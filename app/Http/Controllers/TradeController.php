@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
-use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class UserProfileController extends Controller
+class TradeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,9 +32,10 @@ class UserProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  Request  $request
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
         //
     }
@@ -45,24 +43,13 @@ class UserProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param $user
+     * @param $order
      * @return Response
      * @internal param int $id
      */
-    public function show(User $user)
+    public function show($order)
     {
-        $accounts= $user->accounts()->orderBy('created_at', 'desc')->get();
-        if($user == Auth::user())
-        {
-            $orders = $user->orders;
-            $sold_accounts = $user->sold_accounts;
-        }
-        else
-        {
-            $orders=null;
-            $sold_accounts=null;
-        }
-        return view('user.profile', compact('accounts','user','orders','sold_accounts'));
+        return view('orders.buyer', compact('order'));
     }
 
     /**
@@ -79,10 +66,11 @@ class UserProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  Request  $request
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         //
     }

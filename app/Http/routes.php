@@ -35,9 +35,7 @@ delete('accounts/{account}','AccountsController@destroy');
 get('user/{user}', 'UserProfileController@show');
 
 //Order & Feedback
-get('orders/{order}',function($order){
-    return $order;
-});
+get('trade/{order}','TradeController@show');
 
 //-- PayPal routes --//
 get('api/order/{account}','PaypalController@pay');

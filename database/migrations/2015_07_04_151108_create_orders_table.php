@@ -24,6 +24,8 @@ class CreateOrdersTable extends Migration
 
             $table->integer('user_id')->unsigned(); //buyer
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('seller_user_id')->unsigned(); //buyer
+            $table->foreign('seller_user_id')->references('id')->on('users');
             $table->integer('account_id')->unsigned();
             $table->foreign('account_id')->references('id')->on('accounts');
             $table->string('payKey');

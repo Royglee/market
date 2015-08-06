@@ -9,3 +9,58 @@
 body, label, .checkbox label {
 	font-weight: 300;
 }
+
+
+
+
+
+.trade-status-wrapper.col-sm-8{
+  padding: 0 10px;
+}
+.trade-status{
+  margin-left: 0px;
+  .z-depth(1);
+}
+.trade-status > .row{
+  margin: 0;
+}
+.trade{
+  color: white;
+  margin: 1px 0px;
+  overflow: hidden;
+  padding: 0 10px;
+  //border-left: 10px rgba(255, 255, 255, 0.25) solid;
+  h3{
+	margin: 10px 0px;
+	z-index: 1;
+  }
+  p{
+	z-index: 5;
+  }
+}
+.trade-status-title{
+  background: #a9e0d3;
+  margin-top: 0;
+  h3{
+	margin: 5px 0px;
+  }
+}
+.trade-done{
+  background: #7ad884;
+}
+.trade-done:before {
+  content: "\f00c";
+  font-family: FontAwesome;
+  position: absolute;
+  font-size: 165px;
+  color: rgba(255, 255, 255, 0.25);
+  bottom: -66px;
+  right: -20px;
+  z-index: 1;
+}
+.trade-pending{
+  background: #fac900;
+}
+.trade-inactive{
+  background: #cfcfc4;
+}
