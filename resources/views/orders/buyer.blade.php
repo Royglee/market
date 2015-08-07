@@ -24,9 +24,15 @@
                         </div>
 
                         <div class="row">
-                            <div class="trade trade-pending col-sm-12">
+                            <div class="trade trade-pending col-xs-8">
                                 <h3>Step 2</h3>
-                                <p>It's a pending step</p>
+                                <p>It's a pending step It's a pending step It's a pending step It's a pending step </p>
+                            </div>
+                            <div class="trade trade-pending col-xs-2">
+                                <p>Sanyi</p>
+                            </div>
+                            <div class="trade trade-pending col-xs-2">
+                                <p>Sanyi</p>
                             </div>
                         </div>
 
@@ -60,3 +66,27 @@
     </div>
 
 @endsection
+
+@section('scripts')
+    <script>
+        function equal_cols(el)
+        {
+            var h = 0;
+            $(el).each(function(){
+                $(this).css({'height':'auto'});
+                if($(this).outerHeight() > h)
+                {
+                    h = $(this).outerHeight();
+                }
+                $(this).css({'height':h});
+            });
+        }
+
+        $( document ).ready(function() {
+            equal_cols('.trade-pending');
+            $( window ).resize(function() {
+                equal_cols('.trade-pending');
+            });
+        });
+    </script>
+    @endsection
