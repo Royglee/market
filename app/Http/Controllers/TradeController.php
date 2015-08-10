@@ -49,6 +49,9 @@ class TradeController extends Controller
      */
     public function show($order)
     {
+        $order->ConfS = -1;
+        $order->ConfB = 1;
+
         return view('orders.buyer', compact('order'));
     }
 

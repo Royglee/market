@@ -14,8 +14,9 @@ body, label, .checkbox label {
 
 
 
-.trade-status-wrapper.col-sm-8{
+.trade-status-wrapper{
   padding: 0 10px;
+  margin-bottom: 10px;
 }
 .trade-status{
   margin-left: 0px;
@@ -65,4 +66,39 @@ body, label, .checkbox label {
 }
 .trade-inactive{
   background: #cfcfc4;
+}
+.trade-error{
+  background: #FF6961;
+}
+
+
+.trade-opt-close, .trade-opt-check{
+  padding-top: 55px;
+  font-size: 11px;
+  text-align: center;
+  border-left:10px solid #fac900;
+}
+@media (min-width: @screen-sm-min) {
+  .trade-opt-close, .trade-opt-check{
+    border-left:2px solid #fff;
+  }
+}
+
+.trade-opt-check{
+  background: #7ad884 url(../img/icons/check_ffffff_70.png) no-repeat center top -5px;
+}
+.trade-opt-check:hover{
+ // background-color: #7ad884;
+  background-color: darken(#7ad884,10%);
+}
+.trade-opt-close{
+  background: #FF6961 url(../img/icons/times_ffffff_70.png) no-repeat center  top -5px;
+}
+.trade-opt-close:hover{
+ // background-color: #FF6961;
+  background-color: darken(#FF6961, 5%);
+}
+
+.chat-area{
+  min-height: 400px;
 }

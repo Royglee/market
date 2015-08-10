@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed count
  * @property bool sold
  * @property mixed user_id
+ * @property mixed delivery
  */
 class Account extends Model
 {

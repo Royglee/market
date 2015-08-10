@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
     <div class="container">
-        @if(!$sold_accounts->isEmpty())
+        @if($sold_accounts != null)
             <div class="orders row">
                 <h1>Your sold accounts</h1>
                 <ul>
@@ -12,7 +12,7 @@
             </div>
         @endif
 
-        @if(!$orders->isEmpty())
+        @if($orders != null)
         <div class="orders row">
             <h1>Your orders</h1>
             <ul>

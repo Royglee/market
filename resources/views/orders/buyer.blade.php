@@ -4,8 +4,18 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-4" style="background-color: rgba(255, 0, 0, 0.16);">
-                a
+            <div class="col-sm-4 trade-status-wrapper">
+                <div class="trade-status">
+                    <div class="row">
+                        <div class="trade trade-status-title col-sm-12">
+                            <h3>Chat with Seller</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="chat-area col-sm-12">
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-sm-8 trade-status-wrapper">
@@ -19,41 +29,22 @@
                         <div class="row">
                             <div class="trade trade-done col-sm-12">
                                 <h3>Step 1</h3>
-                                <p>You succesfully ordered an account</p>
+                                <p>
+                                    {{$order->buyer->name}} succesfully ordered an account for ${{$order->account->price}} <br>
+                                    Server: {{$order->account->server}} | Champions: {{$order->account->champions}}
+                                    | Skins: {{$order->account->skins}} | Division: {{$order->account->league}} {{$order->account->division}}
+                                </p>
                             </div>
                         </div>
+                        @include('orders.partials.step2')
+                        @include('orders.partials.step3')
+                        @include('orders.partials.step4')
 
-                        <div class="row">
-                            <div class="trade trade-pending col-xs-8">
-                                <h3>Step 2</h3>
-                                <p>It's a pending step It's a pending step It's a pending step It's a pending step </p>
-                            </div>
-                            <div class="trade trade-pending col-xs-2">
-                                <p>Sanyi</p>
-                            </div>
-                            <div class="trade trade-pending col-xs-2">
-                                <p>Sanyi</p>
-                            </div>
-                        </div>
-
-                       <div class="row">
-                           <div class="trade trade-inactive col-sm-12">
-                               <h3>Step 3</h3>
-                               <p>It's an inactive step</p>
-                           </div>
-                       </div>
-
-                       <div class="row">
-                           <div class="trade trade-inactive col-sm-12">
-                               <h3>Step 4</h3>
-                               <p>It's an inactive step</p>
-                           </div>
-                       </div>
 
                        <div class="row">
                            <div class="trade trade-inactive col-sm-12">
                                <h3>Step 5</h3>
-                               <p>It's an inactive step</p>
+                               <p>Send feedback</p>
                            </div>
                        </div>
 
@@ -71,21 +62,34 @@
     <script>
         function equal_cols(el)
         {
-            var h = 0;
-            $(el).each(function(){
-                $(this).css({'height':'auto'});
-                if($(this).outerHeight() > h)
-                {
-                    h = $(this).outerHeight();
-                }
-                $(this).css({'height':h});
-            });
+            if($(window).width() > 750) {
+                $(el).each(function(){
+                    var h = 0;
+                    var elm = $(this).children();
+                    $(elm).each(function () {
+                        $(this).css({'height': 'auto'});
+                        if ($(this).outerHeight() > h) {
+                            h = $(this).outerHeight();
+                        }
+                    });
+                    $(elm).css({'height': h});
+                });
+
+            }
+            else{
+                $(el).each(function () {
+                    var elm = $(this).children();
+                    $(elm).each(function () {
+                        $(this).css({'height': 'auto'});
+                    });
+                });
+            }
         }
 
         $( document ).ready(function() {
-            equal_cols('.trade-pending');
+            equal_cols('.pending-row');
             $( window ).resize(function() {
-                equal_cols('.trade-pending');
+                equal_cols('.pending-row');
             });
         });
     </script>
