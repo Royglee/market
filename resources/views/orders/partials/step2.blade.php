@@ -1,4 +1,5 @@
 {{--Seller Pending--}}
+@if($order->isSeller && $order->SellerDelivered == 0 && $order->BuyerCancelRequest == 0)
 <div class="row pending-row">
     <div class="trade trade-pending col-sm-8">
         <h3>Step 2</h3>
@@ -11,8 +12,10 @@
         <p>You can't deliver the account. Refund buyer.</p>
     </div>
 </div>
+@endif
 
 {{--Buyer Pending, can't cancel--}}
+@if($order->isBuyer && $order->SellerDelivered == 0 && !$order->delivery_exp)
 <div class="row pending-row">
     <div class="trade trade-pending col-sm-12">
         <h3>Step 2</h3>
@@ -23,8 +26,10 @@
         </p>
     </div>
 </div>
+@endif
 
 {{--Buyer Pending, can cancel--}}
+@if($order->isBuyer && $order->SellerDelivered == 0 && $order->delivery_exp && $order->BuyerCancelRequest == 0)
 <div class="row pending-row">
     <div class="trade trade-pending col-sm-10">
         <h3>Step 2</h3>
@@ -38,18 +43,22 @@
         <p>Cancel order, get refund.</p>
     </div>
 </div>
+@endif
 
 {{--Buyer/Selelr,done--}}
+@if($order->SellerDelivered == 1)
 <div class="row">
     <div class="trade trade-done col-sm-12">
         <h3>Step 2</h3>
         <p>
-            The seller ({{$order->account->user->name}}) delivered the account.
+            The seller ({{$order->seller->name}}) delivered the account.
         </p>
     </div>
 </div>
+@endif
 
 {{--Buyer/Selelr ,Buyer cancel--}}
+@if($order->SellerDelivered == 0 && $order->delivery_exp && $order->BuyerCancelRequest == 1)
 <div class="row">
     <div class="trade trade-error col-sm-12">
         <h3>Step 2</h3>
@@ -58,14 +67,17 @@
         </p>
     </div>
 </div>
+@endif
 
 {{--Buyer/Selelr,Seller cancel--}}
+@if($order->SellerDelivered == -1)
 <div class="row">
     <div class="trade trade-error col-sm-12">
         <h3>Step 2</h3>
         <p>
-            The seller ({{$order->account->user->name}}) can't deliver the account. The order is cancelled.
+            The seller ({{$order->seller->name}}) can't deliver the account. The order is cancelled.
             Buyer ({{$order->buyer->name}}) will get refund.
         </p>
     </div>
 </div>
+@endif
