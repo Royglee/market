@@ -12,10 +12,10 @@
         <p>You can't deliver the account. Refund buyer.</p>
     </div>
 </div>
-@endif
+
 
 {{--Buyer Pending, can't cancel--}}
-@if($order->isBuyer && $order->SellerDelivered == 0 && !$order->delivery_exp)
+@elseif($order->isBuyer && $order->SellerDelivered == 0 && !$order->delivery_exp)
 <div class="row pending-row">
     <div class="trade trade-pending col-sm-12">
         <h3>Step 2</h3>
@@ -26,10 +26,10 @@
         </p>
     </div>
 </div>
-@endif
+
 
 {{--Buyer Pending, can cancel--}}
-@if($order->isBuyer && $order->SellerDelivered == 0 && $order->delivery_exp && $order->BuyerCancelRequest == 0)
+@elseif($order->isBuyer && $order->SellerDelivered == 0 && $order->delivery_exp && $order->BuyerCancelRequest == 0)
 <div class="row pending-row">
     <div class="trade trade-pending col-sm-10">
         <h3>Step 2</h3>
@@ -43,10 +43,9 @@
         <p>Cancel order, get refund.</p>
     </div>
 </div>
-@endif
 
 {{--Buyer/Selelr,done--}}
-@if($order->SellerDelivered == 1)
+@elseif($order->SellerDelivered == 1)
 <div class="row">
     <div class="trade trade-done col-sm-12">
         <h3>Step 2</h3>
@@ -55,10 +54,9 @@
         </p>
     </div>
 </div>
-@endif
 
 {{--Buyer/Selelr ,Buyer cancel--}}
-@if($order->SellerDelivered == 0 && $order->delivery_exp && $order->BuyerCancelRequest == 1)
+@elseif($order->SellerDelivered == 0 && $order->delivery_exp && $order->BuyerCancelRequest == 1)
 <div class="row">
     <div class="trade trade-error col-sm-12">
         <h3>Step 2</h3>
@@ -67,10 +65,9 @@
         </p>
     </div>
 </div>
-@endif
 
 {{--Buyer/Selelr,Seller cancel--}}
-@if($order->SellerDelivered == -1)
+@elseif($order->SellerDelivered == -1)
 <div class="row">
     <div class="trade trade-error col-sm-12">
         <h3>Step 2</h3>

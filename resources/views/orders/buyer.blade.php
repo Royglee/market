@@ -37,8 +37,8 @@
                             </div>
                         </div>
                         @include('orders.partials.step2', ['order' => $order])
-                        @include('orders.partials.step3')
-                        @include('orders.partials.step4')
+                        @include('orders.partials.step3', ['order' => $order])
+                        @include('orders.partials.step4', ['order' => $order])
 
 
                        <div class="row">
