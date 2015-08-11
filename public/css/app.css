@@ -7419,6 +7419,9 @@ label,
 .trade-status > .row {
   margin: 0;
 }
+#tradelist {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+}
 .trade {
   color: white;
   margin: 1px 0px;
@@ -7438,6 +7441,9 @@ label,
 }
 .trade-status-title h3 {
   margin: 5px 0px;
+}
+.trade-status-title span {
+  cursor: pointer;
 }
 .trade-done {
   background: #7ad884;
@@ -7467,6 +7473,7 @@ label,
   font-size: 11px;
   text-align: center;
   border-left: 10px solid #fac900;
+  cursor: pointer;
 }
 @media (min-width: 768px) {
   .trade-opt-close,

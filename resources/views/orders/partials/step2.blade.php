@@ -5,10 +5,10 @@
         <h3>Step 2</h3>
         <p>Deliver the account informations to the buyer.</p>
     </div>
-    <div class="trade trade-opt-check trade-pending col-sm-2">
+    <div class="trade trade-opt-check trade-pending col-sm-2" data-opt="2.check">
         <p>You succesfully delivered the account to the buyer.</p>
     </div>
-    <div class="trade trade-opt-close trade-pending col-sm-2">
+    <div class="trade trade-opt-close trade-pending col-sm-2" data-opt="2.cancel">
         <p>You can't deliver the account. Refund buyer.</p>
     </div>
 </div>
@@ -39,7 +39,7 @@
             and get a refund, or wait for the seller to deliver your account.
         </p>
     </div>
-    <div class="trade trade-opt-close trade-pending col-sm-2">
+    <div class="trade trade-opt-close trade-pending col-sm-2" data-opt="2.cancel">
         <p>Cancel order, get refund.</p>
     </div>
 </div>

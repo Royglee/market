@@ -36,6 +36,14 @@ get('user/{user}', 'UserProfileController@show');
 
 //Order & Feedback
 get('trade/{order}','TradeController@show');
+post('trade/{order}','TradeController@stepProcessor');
+get('trade/{order}/steplist','TradeController@stepList');
+get('trade/reset/{order}',function($order){
+    $order->SellerDelivered = 0;
+    $order->BuyerCancelRequest = 0;
+    $order->BuyerChecked =0;
+    $order->save();
+});
 
 //-- PayPal routes --//
 get('api/order/{account}','PaypalController@pay');

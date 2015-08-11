@@ -26,6 +26,10 @@ body, label, .checkbox label {
   margin: 0;
 }
 
+#tradelist{
+  .z-depth(1);
+}
+
 
 .trade{
   color: white;
@@ -46,6 +50,9 @@ body, label, .checkbox label {
   margin-top: 0;
   h3{
 	margin: 5px 0px;
+  }
+  span{
+    cursor: pointer;
   }
 }
 .trade-done{
@@ -77,6 +84,7 @@ body, label, .checkbox label {
   font-size: 11px;
   text-align: center;
   border-left:10px solid #fac900;
+  cursor: pointer;
 }
 @media (min-width: @screen-sm-min) {
   .trade-opt-close, .trade-opt-check{

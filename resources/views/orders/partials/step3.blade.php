@@ -15,10 +15,10 @@
             <p>Buyer checks the account. If everything is correct, and the account is verified to
                 the buyer's e-mail adress, then the buyer verifies it, else he call an admin. </p>
         </div>
-        <div class="trade trade-opt-check trade-pending col-sm-2">
+        <div class="trade trade-opt-check trade-pending col-sm-2" data-opt="3.check">
             <p>Everything is correct. The account is verified to my e-mail adress.</p>
         </div>
-        <div class="trade trade-opt-close trade-pending col-sm-2">
+        <div class="trade trade-opt-close trade-pending col-sm-2" data-opt="3.error">
             <p>Something is not okay. I need an admin.</p>
         </div>
     </div>
