@@ -1,4 +1,4 @@
-@if($order->payed == 0 && ($order->SellerDelivered != 1 || $order->BuyerChecked != 1  ))
+@if($order->paid == 0 && ($order->SellerDelivered != 1 || $order->BuyerChecked != 1  ))
     <div class="row">
         <div class="trade trade-inactive col-sm-12">
             <h3>Step 4</h3>
@@ -6,7 +6,7 @@
         </div>
     </div>
 
-@elseif($order->payed == 0 && $order->SellerDelivered == 1 && $order->BuyerChecked == 1)
+@elseif($order->paid == 0 && $order->SellerDelivered == 1 && $order->BuyerChecked == 1)
     <div class="row">
         <div class="trade trade-pending col-sm-12">
             <h3>Step 4</h3>
@@ -15,7 +15,7 @@
     </div>
 
 
-@elseif($order->payed == 1)
+@elseif($order->paid == 1)
     <div class="row">
         <div class="trade trade-done col-sm-12">
             <h3>Step 4</h3>
@@ -24,7 +24,7 @@
     </div>
 
 
-@elseif($order->payed == -1)
+@elseif($order->paid == -1)
     <div class="row">
         <div class="trade trade-error col-sm-12">
             <h3>Step 4</h3>

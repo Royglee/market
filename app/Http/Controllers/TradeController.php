@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ExecutePayment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -46,7 +47,7 @@ class TradeController extends Controller
                     $order->BuyerChecked = 1;
                     $order->save();
 
-                    //paypal execute payment
+                    $this->dispatch(new ExecutePayment($order));
                     return 200;
                 }
                 elseif($commandArray['action']=='error' && $order->SellerDelivered == 1 && $order->BuyerChecked == 0){

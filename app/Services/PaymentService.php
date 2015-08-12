@@ -236,4 +236,17 @@ class PaymentService {
             return false;
         }
     }
+
+    public function executePayment($payKey)
+    {
+        $ExecutePaymentFields = array(
+            'PayKey' => $payKey, 								// The pay key that identifies the payment to be executed.  This is the key returned in the PayResponse message.
+            'FundingPlanID' => '' 							// The ID of the funding plan from which to make this payment.
+        );
+
+        $PayPalRequestData = array('ExecutePaymentFields' => $ExecutePaymentFields);
+
+        $PayPalResult = $this->PayPal->ExecutePayment($PayPalRequestData);
+        return $PayPalResult;
+    }
   }

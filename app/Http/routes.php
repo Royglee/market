@@ -16,6 +16,8 @@ use App\Order;
 Route::get('/success', function(){
     return view('succes');
 });
+
+get('queue','TradeController@queue');
 // End of test things
 
 

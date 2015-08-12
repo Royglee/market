@@ -35,7 +35,19 @@ class PaypalController extends Controller
     public function ipn( User $user, AccountRepository $account, PaymentService $paypal)
     {
         if($paypal->isIPNVerified()){
-            $account->buyer($user)->sold($paypal->ipnMessage(true)['pay_key']);
+            $IPNMessage = $paypal->ipnMessage(true);
+            //Log::info($IPNMessage);
+            if($IPNMessage['status'] == 'INCOMPLETE' && !Order::where('payKey', $IPNMessage['pay_key'])->exists()){
+                $account->buyer($user)->sold($IPNMessage['pay_key']);
+            }
+            elseif($IPNMessage['status'] == 'COMPLETED' && $IPNMessage['transaction[1].status'] == 'Completed'){
+                Log::info("Execute Payment IPN érkezett PayKey: ".$IPNMessage['pay_key']);
+
+                $order = new Order();
+                $order =$order->where('payKey', $IPNMessage['pay_key'])->first();
+                $order->paid = 1;
+                $order->save();
+            }
         } else {
             Log::info("INVALID");
         }
