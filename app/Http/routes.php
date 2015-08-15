@@ -11,10 +11,19 @@
 |
 */
 
+use App\Events\TradeStatusChangedEvent;
+//use Event;
 use App\Order;
 
 Route::get('/success', function(){
     return view('succes');
+});
+Route::get('/eventtest', function(){
+    return view('test');
+});
+get('change', function(){
+    Event::fire(new TradeStatusChangedEvent());
+    return 'event fired';
 });
 
 get('queue','TradeController@queue');
@@ -46,6 +55,7 @@ get('trade/reset/{order}',function($order){
     $order->BuyerChecked =0;
     $order->save();
 });
+
 
 //-- PayPal routes --//
 get('api/order/{account}','PaypalController@pay');
