@@ -58,6 +58,27 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+
+
+$.post( "../api/token", function( data ) {
+    var socket = io.connect('http://market.dev:6001', {
+        'query': 'token=' + data
+    });
+
+    socket.on('App\\Events\\TradeStatusChangedEvent', function(message){
+        refreshStepList();
+        console.log('event');
+    });
+
+    socket.on("error", function(error) {
+        if (error.type == "UnauthorizedError" || error.code == "invalid_token") {
+            console.log("User's token has expired");
+            location.reload();
+
+        }
+    });
+});
+
 $( document ).ready(function() {
     equal_cols('.pending-row');
     sendOptionBindings();

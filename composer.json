@@ -11,7 +11,8 @@
         "ext-curl": "*",
         "angelleye/paypal-php-library": "2.0.*",
         "golonka/bbcodeparser": "dev-master",
-        "predis/predis": "~1.0"
+        "predis/predis": "~1.0",
+        "lcobucci/jwt": "^3.1@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "1.6.x-dev",

@@ -10,15 +10,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class TradeStatusChangedEvent extends Event implements ShouldBroadcast
 {
     use SerializesModels;
-    public $user;
+    private $userid;
 
     /**
      * Create a new event instance.
-     *
+     * @param array $userid
      */
-    public function __construct()
+    public function __construct($userid)
     {
-        $this->user = User::find(1);
+        $this->userid = $userid;
     }
 
     /**
@@ -28,6 +28,6 @@ class TradeStatusChangedEvent extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['test-chanel'];
+        return $this->userid;
     }
 }

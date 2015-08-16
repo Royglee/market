@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e4797aa7083109a822bf4467cb0198dd",
+    "hash": "bd8ce815f31ce35d82d8bc80e2c552b0",
     "packages": [
         {
             "name": "angelleye/paypal-php-library",
@@ -633,6 +633,62 @@
                 "laravel"
             ],
             "time": "2015-08-12 18:16:08"
+        },
+        {
+            "name": "lcobucci/jwt",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lcobucci/jwt.git",
+                "reference": "98749095662720863e73c4c1cca90cf3dcceda88"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/98749095662720863e73c4c1cca90cf3dcceda88",
+                "reference": "98749095662720863e73c4c1cca90cf3dcceda88",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "~2.2",
+                "phpunit/php-invoker": "~1.1",
+                "phpunit/phpunit": "~4.5",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lcobucci\\JWT\\": [
+                        "src",
+                        "test"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Luís Otávio Cobucci Oblonczyk",
+                    "email": "lcobucci@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to work with JSON Web Token and JSON Web Signature",
+            "keywords": [
+                "JWS",
+                "jwt"
+            ],
+            "time": "2015-08-03 20:19:11"
         },
         {
             "name": "league/flysystem",
@@ -3121,6 +3177,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "golonka/bbcodeparser": 20,
+        "lcobucci/jwt": 20,
         "fzaninotto/faker": 20
     },
     "prefer-stable": true,

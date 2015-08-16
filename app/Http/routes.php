@@ -26,7 +26,6 @@ get('change', function(){
     return 'event fired';
 });
 
-get('queue','TradeController@queue');
 // End of test things
 
 
@@ -55,6 +54,10 @@ get('trade/reset/{order}',function($order){
     $order->BuyerChecked =0;
     $order->save();
 });
+
+//Websocket
+post('api/token','WebsocketController@token');
+get('api/token','WebsocketController@token');
 
 
 //-- PayPal routes --//
