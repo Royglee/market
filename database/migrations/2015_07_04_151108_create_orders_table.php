@@ -38,6 +38,9 @@ class CreateOrdersTable extends Migration
             $table->integer('account_id')->unsigned();
             $table->foreign('account_id')->references('id')->on('accounts');
 
+            $table->integer('thread_id')->unsigned();
+            $table->foreign('thread_id')->references('id')->on('threads');
+
             $table->string('payKey');
             $table->timestamps();
         });

@@ -7403,11 +7403,6 @@ textarea#body {
 .Challenger_title_font {
   color: #0e524c;
 }
-body,
-label,
-.checkbox label {
-  font-weight: 300;
-}
 .trade-status-wrapper {
   padding: 0 10px;
   margin-bottom: 10px;
@@ -7494,7 +7489,36 @@ label,
   background-color: #ff5147;
 }
 .chat-area {
-  min-height: 400px;
+  min-height: 380px;
+  max-height: 380px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#chat {
+  outline: none;
+  resize: none;
+  overflow: auto;
+  border: none;
+  border-top: 2px solid #c8c8c8;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#chat-send {
+  position: absolute;
+  bottom: -7px;
+  right: 7px;
+  font-size: 24px;
+  color: #5095d5;
+}
+.textarea-cont {
+  position: relative;
+  height: 20px;
+}
+body,
+label,
+.checkbox label {
+  font-weight: 300;
 }
 
 /*# sourceMappingURL=style.css.map */

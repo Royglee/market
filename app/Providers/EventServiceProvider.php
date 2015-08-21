@@ -17,6 +17,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\ViewAccountEventListener',
         ],
         'App\Events\TradeStatusChangedEvent' => [],
+        'App\Events\NewMessageEvent' => [],
     ];
 
     /**

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
  * @property mixed acount
  * @property mixed seller
  * @property mixed buyer
+ * @property mixed thread_id
  */
 class Order extends Model
 {
@@ -49,5 +50,10 @@ class Order extends Model
     public function account()
     {
         return $this->belongsTo('App\Account');
+    }
+
+    public function thread()
+    {
+        return $this->belongsTo('Cmgmyr\Messenger\Models\Thread');
     }
 }

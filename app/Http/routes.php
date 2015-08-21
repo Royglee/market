@@ -48,6 +48,10 @@ get('user/{user}', 'UserProfileController@show');
 get('trade/{order}','TradeController@show');
 post('trade/{order}','TradeController@stepProcessor');
 get('trade/{order}/steplist','TradeController@stepList');
+post('trade/{order}/chat','TradeController@storeChatMessage');
+//get('trade/{order}/chat','TradeController@storeChatMessage');
+
+
 get('trade/reset/{order}',function($order){
     $order->SellerDelivered = 0;
     $order->BuyerCancelRequest = 0;
@@ -56,8 +60,9 @@ get('trade/reset/{order}',function($order){
 });
 
 //Websocket
+post('api/token/{order}','WebsocketController@token');
 post('api/token','WebsocketController@token');
-get('api/token','WebsocketController@token');
+//get('api/token','WebsocketController@token');
 
 
 //-- PayPal routes --//

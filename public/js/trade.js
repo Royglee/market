@@ -48,6 +48,36 @@ function refreshStepList($this){
             if ($this) {$this.removeClass('glyphicon-refresh-animate');}
         });
 }
+function chatScrollTop(duration){
+    $('#chat-area').animate({ scrollTop: $("#chat-area")[0].scrollHeight}, duration);
+}
+
+function sendChatMessage(){
+    var input = $('#chat');
+    var message = input.val();
+    var me = input.data('name');
+    input.val("");
+
+    var bubble = $('<div>'+ me +': '+ message +'</div>')
+    bubble.css('color','blue');
+
+    $('#chat-area').append(bubble);
+    chatScrollTop(1000);
+
+    $.post( window.location.href.split('?')[0]+"/chat", { message:  message})
+        .done(function( data ) {
+            //valami visszacsatolás a sikeres küldésrõl
+            if(data){
+                bubble.css('color','black');
+            }
+        })
+        .fail(function( data ) {
+            //valami visszacsatolás a sikeres küldésrõl
+            if(data){
+                bubble.css('color','red');
+            }
+        });
+}
 
 //----Bindings and Init
 $( window ).resize(function() {
@@ -59,15 +89,29 @@ $.ajaxSetup({
     }
 });
 
-
-$.post( "../api/token", function( data ) {
-    var socket = io.connect('http://market.dev:6001', {
+//----Socket.io Connection and events
+var lastEvent = 0;
+$.post( "/api/token/" + $('#chat').data('order'), function( data ){
+    var socket = io.connect("http://178.164.163.108/:8000:6001", {
         'query': 'token=' + data
     });
 
     socket.on('App\\Events\\TradeStatusChangedEvent', function(message){
         refreshStepList();
-        console.log('event');
+    });
+
+    socket.on('App\\Events\\NewMessageEvent', function(message){
+        $('#chat-area').append($('<div>' +message.sender+': '+ message.message +'</div>'));
+        $('.type-area').addClass('hidden');
+        chatScrollTop(1000);
+    });
+
+    socket.on('partner_typing', function(message){
+        var typeArea = $('.type-area');
+        typeArea.removeClass('hidden').text(message + ' is typing...').delay(1000);
+        setTimeout(function() {
+            typeArea.addClass('hidden');
+        }, 2000)
     });
 
     socket.on("error", function(error) {
@@ -77,13 +121,32 @@ $.post( "../api/token", function( data ) {
 
         }
     });
+
+    $('#chat').keypress(function(event) {
+        if ((Date.now() - 2000) > lastEvent){
+            socket.emit('typing');
+            lastEvent = Date.now();
+        }
+    });
 });
+//---- End of Socket.io
 
 $( document ).ready(function() {
     equal_cols('.pending-row');
     sendOptionBindings();
+    chatScrollTop(0);
 
     $(' #refresh ').click(function() {
         refreshStepList($(this));
+    });
+
+    $('#chat-send').click(function(){
+        sendChatMessage();
+    });
+    $('#chat').keypress(function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            sendChatMessage();
+        }
     });
 });

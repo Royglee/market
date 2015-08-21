@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool sold
  * @property mixed user_id
  * @property mixed delivery
+ * @property mixed title
  */
 class Account extends Model
 {

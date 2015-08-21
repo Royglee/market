@@ -8,11 +8,20 @@
                 <div class="trade-status">
                     <div class="row">
                         <div class="trade trade-status-title col-sm-12">
-                            <h3>Chat with Seller</h3>
+                            <h3>Chat</h3>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="chat-area col-sm-12">
+                        <div class="chat-area col-sm-12" id="chat-area">
+                                @foreach($order->thread->messages as $message)
+                                    <div>{{$message->user->name}} : {{$message->body}}</div>
+                                @endforeach
+                        </div>
+                        <div class="type-area col-sm-12 hidden"></div>
+                        <div class="clearfix"></div>
+                        <div class="textarea-cont">
+                            <textarea class="col-xs-12" name="message" id="chat" data-order="{{$order->id}}" data-name="{{Auth::user()->name}}" rows="1"></textarea>
+                            <i id="chat-send" class="fa fa-paper-plane"></i>
                         </div>
                     </div>
                 </div>

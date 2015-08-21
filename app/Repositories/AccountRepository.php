@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Account;
 use App\Order;
 use App\User;
+use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Http\Request;
 
 class AccountRepository {
@@ -91,6 +92,13 @@ class AccountRepository {
     public function sold($payKey)
     {
         $order = new Order();
+        $thread = Thread::create(
+            [
+                'subject' => $this->account->title,
+            ]
+        );
+        $thread->addParticipants([$this->buyer->id, $this->account->seller_id()]);
+
         if ($this->account->count > 1)
         {
             $this->account->count-= 1;
@@ -103,6 +111,7 @@ class AccountRepository {
         $order -> account_id = $this->account->id;
         $order -> user_id =$this->buyer->id;
         $order -> seller_user_id = $this->account->seller_id();
+        $order -> thread_id = $thread->id;
         $order -> payKey = $payKey;
         $order->save();
 
