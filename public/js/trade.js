@@ -92,7 +92,7 @@ $.ajaxSetup({
 //----Socket.io Connection and events
 var lastEvent = 0;
 $.post( "/api/token/" + $('#chat').data('order'), function( data ){
-    var socket = io.connect("http://178.164.163.108/:8000:6001", {
+    var socket = io.connect(location.protocol+"//"+ location.host+":6001", {
         'query': 'token=' + data
     });
 
