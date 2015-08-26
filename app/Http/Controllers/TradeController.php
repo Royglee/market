@@ -57,6 +57,7 @@ class TradeController extends Controller
                 ]);
                 $order->SellerSentFeedback = 1;
                 $order->save();
+                Event::fire(new TradeStatusChangedEvent([$order->buyer->id]));
 
                 return 200;
             }
@@ -102,7 +103,7 @@ class TradeController extends Controller
                 ]);
                 $order->BuyerSentFeedback = 1;
                 $order->save();
-
+                Event::fire(new TradeStatusChangedEvent([$order->seller->id]));
                     return 200;
             }
 

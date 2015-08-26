@@ -38,7 +38,7 @@
         <p>Waiting for {{$order->isBuyer?$order->seller->name:$order->buyer->name}}'s feedback.</p>
     </div>
     <div class="trade bg-{{$order->authUserFeedback()->feedback}} trade-feedback-column col-sm-6">
-        <h4>You sent a {{$order->authUserFeedback()->feedback}} feedback</h4>
+        <h4>You sent a {{$order->authUserFeedback()->feedback}} feedback to {{$order->partnerName}}</h4>
         <div class="feedback_wr">
             <div class="feedback_ei">
                 @if($order->authUserFeedback()->feedback == "positive")
