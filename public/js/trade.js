@@ -108,7 +108,7 @@ $.post( "/api/token/" + $('#chat').data('order'), function( data ){
 
     socket.on('partner_typing', function(message){
         var typeArea = $('.type-area');
-        typeArea.removeClass('hidden').text(message + ' is typing...').delay(1000);
+        typeArea.removeClass('hidden').text(message + ' is typing...');
         setTimeout(function() {
             typeArea.addClass('hidden');
         }, 2000)

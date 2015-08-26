@@ -91,6 +91,53 @@
   background-color: darken(#FF6961, 5%);
 }
 
+.trade-feedback-column{
+  border-left:5px solid #fff;
+}
+
+@media (min-width: @screen-sm-min) {
+  .trade-feedback-column{
+    border-left:2px solid #fff;
+  }
+}
+
+.trade #review{
+  color: #fac900;
+  resize: none;
+  overflow: hidden;
+  overflow-y: auto;
+  margin-bottom: 10px;
+
+  color: #fff;
+  border-radius: 0;
+  border: 2px solid #fff;
+  box-shadow: none;
+  outline: none;
+  background-color: #fac900;
+  &:focus, &:active{
+    outline: none!important;
+    box-shadow: none;
+  }
+  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #fff;
+    opacity:  0.8;
+  }
+  &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #fff;
+    opacity:  0.8;
+  }
+  &::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #fff;
+    opacity:  0.8;
+  }
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #fff;
+    opacity:  0.8;
+  }
+}
+
+
+/*CHAT AREA*/
 .chat-area{
   min-height: 380px;
   max-height: 380px;
@@ -122,3 +169,4 @@
   position: relative;
   height:20px;
 }
+
