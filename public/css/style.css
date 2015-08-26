@@ -7109,6 +7109,28 @@ textarea#body {
   color: #fff;
   opacity: 0.8;
 }
+.feedback_wr {
+  position: relative;
+  min-height: 55px;
+}
+.sent-review {
+  display: block;
+  padding: 5px 10px 5px 55px;
+}
+.feedback_ei {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.bg-positive {
+  background-color: #7ad884;
+}
+.bg-neutral {
+  background-color: #cfcfc4;
+}
+.bg-negative {
+  background-color: #ff766f;
+}
 /*CHAT AREA*/
 .chat-area {
   min-height: 380px;
@@ -7176,41 +7198,62 @@ textarea#body {
   color: #7ad884;
 }
 .trade .fb-pos:hover,
-.trade .fb-pos:focus {
-  color: #fff;
-  background-color: #7ad884 ;
+.trade .fb-pos.selected {
+  color: #fff!important;
+  background-color: #7ad884!important ;
+}
+.trade .fb-pos.selected {
+  box-shadow: none!important;
 }
 .trade .fb-pos:active {
   border-color: #fff;
+}
+.trade .fb-pos:focus {
+  background-color: #fff;
 }
 .trade .fb-neu {
   color: #cfcfc4;
 }
 .trade .fb-neu:hover,
-.trade .fb-neu:focus {
-  color: #fff;
-  background-color: #cfcfc4;
+.trade .fb-neu.selected {
+  color: #fff!important;
+  background-color: #cfcfc4!important;
+}
+.trade .fb-neu.selected {
+  box-shadow: none!important;
 }
 .trade .fb-neu:active {
   border-color: #fff;
+}
+.trade .fb-neu:focus {
+  background-color: #fff;
 }
 .trade .fb-neg {
   color: #ff766f;
 }
 .trade .fb-neg:hover,
-.trade .fb-neg:focus {
-  color: #fff;
-  background-color: #ff766f;
+.trade .fb-neg.selected {
+  color: #fff!important;
+  background-color: #ff766f!important;
+}
+.trade .fb-neg.selected {
+  box-shadow: none!important;
 }
 .trade .fb-neg:active {
   border-color: #fff;
+}
+.trade .fb-neg:focus {
+  background-color: #fff;
 }
 .trade .btn,
 .trade .btn:focus {
   text-decoration: none;
   outline: none;
 }
-.trade a.btn {
+span.selected {
+  cursor: auto;
+}
+.trade div.btn {
   letter-spacing: 1px;
   text-decoration: none;
   background: none;
@@ -7230,56 +7273,56 @@ textarea#body {
   border: 3px solid;
   padding: 8px 20px;
 }
-.trade a.btn-outlined {
+.trade div.btn-outlined {
   border-radius: 0;
   transition: all 0.3s;
 }
-.trade a.btn-outlined.btn-theme {
+.trade div.btn-outlined.btn-theme {
   background: none;
   color: #6f5499;
   border-color: #6f5499;
 }
-.trade a.btn-outlined.btn-theme:hover,
-.trade a.btn-outlined.btn-theme:active {
+.trade div.btn-outlined.btn-theme:hover,
+.trade div.btn-outlined.btn-theme:active {
   color: #FFF;
   background: #6f5499;
   border-color: #6f5499;
 }
-.trade a.btn-outlined.btn-black {
+.trade div.btn-outlined.btn-black {
   background: none;
   color: #000000;
   border-color: #000000;
 }
-.trade a.btn-outlined.btn-black:hover,
-.trade a.btn-outlined.btn-black:active {
+.trade div.btn-outlined.btn-black:hover,
+.trade div.btn-outlined.btn-black:active {
   color: #FFF;
   background: #000000;
   border-color: #000000;
 }
-.trade a.btn-outlined.btn-white {
+.trade div.btn-outlined.btn-white {
   background: none;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
-.trade a.btn-outlined.btn-white:hover,
-.trade a.btn-outlined.btn-white:active {
+.trade div.btn-outlined.btn-white:hover,
+.trade div.btn-outlined.btn-white:active {
   color: #fac900;
   background: #FFFFFF;
   border-color: #FFFFFF;
 }
-.trade a.btn-xs {
+.trade div.btn-xs {
   font-size: 11px;
   line-height: 14px;
   border: 2px solid;
   padding: 5px 10px;
 }
-.trade a.btn-sm {
+.trade div.btn-sm {
   font-size: 12px;
   line-height: 16px;
   border: 2px solid;
   padding: 8px 15px;
 }
-.trade a.btn-lg {
+.trade div.btn-lg {
   font-size: 18px;
   line-height: 22px;
   border: 4px solid;

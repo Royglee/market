@@ -1,6 +1,16 @@
 @extends('app')
 @section('content')
     <div class="container">
+        @if(Auth::user()->feedbacks_sent != null)
+            <div class="row">
+                <h1>Feedbacks sent</h1>
+                <ul>
+                    @foreach(Auth::user()->feedbacks_sent as $feedback)
+                        <li>{{$feedback->feedback}}: {{$feedback->review}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         @if($sold_accounts != null)
             <div class="orders row">
                 <h1>Your sold accounts</h1>
@@ -11,7 +21,6 @@
                 </ul>
             </div>
         @endif
-
         @if($orders != null)
         <div class="orders row">
             <h1>Your orders</h1>

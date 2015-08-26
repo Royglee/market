@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NewMessageEvent;
 use App\Events\TradeStatusChangedEvent;
+use App\Feedback;
 use App\Jobs\ExecutePayment;
 use App\User;
 use Carbon\Carbon;
@@ -24,7 +25,7 @@ class TradeController extends Controller
     {
 //        $userId = Auth::user()->id;
 //        $users = User::whereNotIn('id', $order->thread->participantsUserIds($userId))->get();
-//        dd($users);
+        //dd($order->partnersFeedback());
         return view('orders.buyer', compact('order'));
     }
 
@@ -45,6 +46,19 @@ class TradeController extends Controller
                     Event::fire(new TradeStatusChangedEvent([$order->buyer->id]));
                     return 200;
                 }
+            }
+            if($commandArray['step']==5 && $commandArray['action']=='feedback' && $order->SellerSentFeedback == 0){
+                $feedback = (new Feedback())->create([
+                    'feedback'      => $commandArray['feedback'],
+                    'review'        => $commandArray['review'],
+                    'sender_id'     => $order->seller->id,
+                    'receiver_id'   => $order->buyer->id,
+                    'order_id'      => $order->id
+                ]);
+                $order->SellerSentFeedback = 1;
+                $order->save();
+
+                return 200;
             }
         }
         if($order->isBuyer){
@@ -71,6 +85,25 @@ class TradeController extends Controller
                     Event::fire(new TradeStatusChangedEvent([$order->seller->id]));
                     return 200;
                 }
+                elseif($commandArray['action']=='error' && $order->SellerDelivered == 1 && $order->BuyerChecked == 0){
+                    $order->BuyerChecked = -1;
+                    $order->save();
+                    Event::fire(new TradeStatusChangedEvent([$order->seller->id]));
+                    return 200;
+                }
+            }
+            if($commandArray['step']==5 && $commandArray['action']=='feedback' && $order->BuyerSentFeedback == 0){
+                $feedback = (new Feedback())->create([
+                    'feedback'      => $commandArray['feedback'],
+                    'review'        => $commandArray['review'],
+                    'sender_id'     => $order->buyer->id,
+                    'receiver_id'   => $order->seller->id,
+                    'order_id'      => $order->id
+                ]);
+                $order->BuyerSentFeedback = 1;
+                $order->save();
+
+                    return 200;
             }
 
         }

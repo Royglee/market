@@ -26,13 +26,24 @@ function equal_cols(el)
 function sendOptionBindings(){
     $(' div[data-opt] ').click(function() {
         var command = $(this).data('opt').split('.');
-        $.post( location.href, {'step':command[0],'action':command[1]})
+        var postData =(command[0]==5)?
+                        {'step':command[0],'action':command[1],'feedback':$('#feedback').val(),'review':$('#review').val()}
+                        :{'step':command[0],'action':command[1]};
+
+        $.post( location.href, postData)
             .done(function( data ) {
                 console.log(data);
             })
             .always(function() {
                 refreshStepList();
             });
+    });
+}
+function chooseFeedbackBindings(){
+    $(' button[data-feedback] ').click(function() {
+        $('#feedback').val($(this).data('feedback'));
+        $(' button[data-feedback] ').removeClass('selected');
+        $(this).addClass('selected');
     });
 }
 function refreshStepList($this){
@@ -43,6 +54,7 @@ function refreshStepList($this){
             $('#tradelist').html(data);
             equal_cols('.pending-row');
             sendOptionBindings();
+            chooseFeedbackBindings();
         })
         .always(function() {
             if ($this) {$this.removeClass('glyphicon-refresh-animate');}
@@ -51,7 +63,6 @@ function refreshStepList($this){
 function chatScrollTop(duration){
     $('#chat-area').animate({ scrollTop: $("#chat-area")[0].scrollHeight}, duration);
 }
-
 function sendChatMessage(){
     var input = $('#chat');
     var message = input.val();
@@ -135,6 +146,7 @@ $( document ).ready(function() {
     equal_cols('.pending-row');
     sendOptionBindings();
     chatScrollTop(0);
+    chooseFeedbackBindings();
 
     $(' #refresh ').click(function() {
         refreshStepList($(this));

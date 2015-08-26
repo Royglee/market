@@ -43,9 +43,9 @@
                    </div>
             </div>
         </div>
-        <div class="row" style="padding:10px">
+        {{--<div class="row" style="padding:10px">
             {{var_dump($order->toArray())}}
-        </div>
+        </div>--}}
     </div>
 
 @endsection

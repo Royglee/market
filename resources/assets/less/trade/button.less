@@ -38,34 +38,52 @@
 
 .trade .fb-pos{
   color: #7ad884;
-  &:hover,&:focus{
-    color: #fff;
-    background-color:#7ad884 ;
+  &:hover,&.selected{
+    color: #fff!important;
+    background-color:#7ad884!important ;
+  }
+  &.selected{
+    box-shadow: none!important;
   }
   &:active{
     border-color: #fff;
+  }
+  &:focus{
+    background-color: #fff;
   }
 }
 
 .trade .fb-neu{
   color: #cfcfc4;
-  &:hover,&:focus{
-    color: #fff;
-    background-color:#cfcfc4;
+  &:hover,&.selected{
+    color: #fff!important;
+    background-color:#cfcfc4!important;
+  }
+  &.selected{
+    box-shadow: none!important;
   }
   &:active{
     border-color: #fff;
+  }
+  &:focus{
+    background-color: #fff;
   }
 }
 
 .trade .fb-neg{
   color: #ff766f;
-  &:hover,&:focus{
-    color: #fff;
-    background-color:#ff766f;
+  &:hover,&.selected{
+    color: #fff!important;
+    background-color:#ff766f!important;
+  }
+  &.selected{
+    box-shadow: none!important;
   }
   &:active{
     border-color: #fff;
+  }
+  &:focus{
+    background-color: #fff;
   }
 }
 
@@ -75,7 +93,12 @@
 
 }
 
-.trade a{
+span.selected{
+  cursor: auto;
+}
+
+//OUTLINED BUTTON
+.trade div{
 
   &.btn {
     letter-spacing: 1px;
