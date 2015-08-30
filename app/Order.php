@@ -29,7 +29,7 @@ class Order extends Model
 
     public function getDeliveryExpAttribute()
     {
-        return $this->created_at->addHours($this->account->delivery)->isPast();
+        return $this->created_at->addMinutes(round(($this->account->delivery)*60))->isPast();
     }
     public function getIsSellerAttribute()
     {

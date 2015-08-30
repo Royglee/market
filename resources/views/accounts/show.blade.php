@@ -9,12 +9,16 @@
             <div class="head_title_ir">
                 <div class="acc_meta">
                     <div class="pull-left item" data-toggle="tooltip" data-placement="top" title="Number of views">
-                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                    <span>{{$account->view_count}}</span>
+                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        <span>{{$account->view_count}}</span>
                     </div>
                     <div class="pull-left item" data-toggle="tooltip" data-placement="top" title="Time left">
                         <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
                         <span>{{$account->created_at->addDays($account->duration)->diffForHumans()}}</span>
+                    </div>
+                    <div class="pull-left item" data-toggle="tooltip" data-placement="top" title="Guaranteed delivery time">
+                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        <span>{{$account->delivery}}h</span>
                     </div>
                 </div>
                 @if(!$account->sold)

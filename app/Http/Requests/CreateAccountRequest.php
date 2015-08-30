@@ -31,7 +31,7 @@ class CreateAccountRequest extends Request
             'first_owner' => 'required|boolean',
             'has_email'=>'required|boolean',
             'duration'=>'required|in:7,14,30',
-            'delivery'=>'required',
+            'delivery'=>'required|numeric',
             'title' => 'required|max:255|min:3',
             'server' => 'required|in:NA,EUNE,EUW,OCE,BR,LA,RU,TR,KR',
             'league' => 'required|in:Unranked,Bronze,Silver,Gold,Platinum,Diamond,Master,Challenger',
