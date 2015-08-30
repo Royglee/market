@@ -108,14 +108,24 @@ class AccountRepository {
         }
         $this->account->save();
 
-        $order -> account_id = $this->account->id;
+        if($this->account->sold != 1) {
+            $account = $this->account->replicate(['count', 'id']);
+            $account->count = 0;
+            $account->sold = 1;
+            $account->save();
+            $order -> account_id = $account->id;
+        }
+        else
+        {
+            $order -> account_id =  $this->account->id;
+        }
+
+
         $order -> user_id =$this->buyer->id;
         $order -> seller_user_id = $this->account->seller_id();
         $order -> thread_id = $thread->id;
         $order -> payKey = $payKey;
         $order->save();
-
-        dd($order->all()->toArray());
 
 
         return $this;
