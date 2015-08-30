@@ -35,7 +35,7 @@ function sendOptionBindings(){
                 console.log(data);
             })
             .always(function() {
-                refreshStepList();
+                refreshStepList(true);
             });
     });
 }
@@ -108,7 +108,7 @@ $.post( "/api/token/" + $('#chat').data('order'), function( data ){
     });
 
     socket.on('App\\Events\\TradeStatusChangedEvent', function(message){
-        refreshStepList();
+        if ( !$( "#feedback" ).length ){refreshStepList()};
     });
 
     socket.on('App\\Events\\NewMessageEvent', function(message){
