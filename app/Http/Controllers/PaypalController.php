@@ -26,6 +26,9 @@ class PaypalController extends Controller
     }
     public function pay(PaymentService $paypal, Account $account)
     {
+        if ($account->user_id == Auth::user()->id){
+            abort(400,"You can't buy your own account");
+        }
         if (!$account->sold) {
             return $paypal
                 ->order($account)

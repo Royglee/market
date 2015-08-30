@@ -48,6 +48,10 @@ class TradeController extends Controller
                 }
             }
             if($commandArray['step']==5 && $commandArray['action']=='feedback' && $order->SellerSentFeedback == 0){
+                $this->validate($request, [
+                    'feedback' => 'required|in:positive,neutral,negative',
+                    'review' => 'required|min:10|max:200',
+                ]);
                 $feedback = (new Feedback())->create([
                     'feedback'      => $commandArray['feedback'],
                     'review'        => $commandArray['review'],
@@ -94,6 +98,10 @@ class TradeController extends Controller
                 }
             }
             if($commandArray['step']==5 && $commandArray['action']=='feedback' && $order->BuyerSentFeedback == 0){
+                $this->validate($request, [
+                    'feedback' => 'required|in:positive,neutral,negative',
+                    'review' => 'required|min:10|max:200',
+                ]);
                 $feedback = (new Feedback())->create([
                     'feedback'      => $commandArray['feedback'],
                     'review'        => $commandArray['review'],
@@ -120,6 +128,10 @@ class TradeController extends Controller
 
     public function storeChatMessage($order, Request $request, Message $message)
     {
+        $this->validate($request, [
+            'message' => 'required',
+        ]);
+
         $thread = $order->thread;
 
 

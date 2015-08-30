@@ -30,13 +30,19 @@ function sendOptionBindings(){
                         {'step':command[0],'action':command[1],'feedback':$('#feedback').val(),'review':$('#review').val()}
                         :{'step':command[0],'action':command[1]};
 
-        $.post( location.href, postData)
-            .done(function( data ) {
-                console.log(data);
-            })
-            .always(function() {
-                refreshStepList(true);
-            });
+        if(postData['step'] != 5 ||(postData['step'] == 5 && postData['feedback'] != "" && postData['review'] != "")){
+            $.post( location.href, postData)
+                .done(function( data ) {
+                    console.log(data);
+                })
+                .always(function() {
+                    refreshStepList(true);
+                });
+        }
+        else{
+            alert('Please fill out every field!');
+        }
+
     });
 }
 function chooseFeedbackBindings(){
@@ -63,31 +69,33 @@ function refreshStepList($this){
 function chatScrollTop(duration){
     $('#chat-area').animate({ scrollTop: $("#chat-area")[0].scrollHeight}, duration);
 }
-function sendChatMessage(){
+function sendChatMessage() {
     var input = $('#chat');
     var message = input.val();
-    var me = input.data('name');
-    input.val("");
+    if ($.trim(message).length > 0) {
+        var me = input.data('name');
+        input.val("");
 
-    var bubble = $('<div>'+ me +': '+ message +'</div>')
-    bubble.css('color','blue');
+        var bubble = $('<div>' + me + ': ' + message + '</div>')
+        bubble.css('color', 'blue');
 
-    $('#chat-area').append(bubble);
-    chatScrollTop(1000);
+        $('#chat-area').append(bubble);
+        chatScrollTop(0);
 
-    $.post( window.location.href.split('?')[0]+"/chat", { message:  message})
-        .done(function( data ) {
-            //valami visszacsatolás a sikeres küldésrõl
-            if(data){
-                bubble.css('color','black');
-            }
-        })
-        .fail(function( data ) {
-            //valami visszacsatolás a sikeres küldésrõl
-            if(data){
-                bubble.css('color','red');
-            }
-        });
+        $.post(window.location.href.split('?')[0] + "/chat", {message: message})
+            .done(function (data) {
+                //valami visszacsatolás a sikeres küldésrõl
+                if (data) {
+                    bubble.css('color', 'black');
+                }
+            })
+            .fail(function (data) {
+                //valami visszacsatolás a sikeres küldésrõl
+                if (data) {
+                    bubble.css('color', 'red');
+                }
+            });
+    }
 }
 
 //----Bindings and Init

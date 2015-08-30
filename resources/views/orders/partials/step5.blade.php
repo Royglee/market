@@ -23,7 +23,7 @@
         <input type="hidden" value="" id="feedback" name="feedback">
 
         <h4>Write a short review:</h4>
-        <textarea class="form-control" placeholder="Write a short review here..." spellcheck="false" name="review" id="review" cols="40" rows="2"></textarea>
+        <textarea class="form-control" placeholder="Write a short review here..." spellcheck="false" name="review" id="review" cols="40" rows="2" required></textarea>
         <div class="btn btn-outlined btn-white btn-sm" data-wow-delay="0.7s" data-opt="5.feedback">Send Feedback</div>
     </div>
 </div>

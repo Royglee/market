@@ -33,6 +33,7 @@ $(document).ready(function(){
             paypalForm.trigger('click').submit();
         }).fail(function(data, status, xhr) {
             if (data.status == 401) {alert('You have to log in first')}
+            if (data.status == 400) {alert("You can't buy your own account")}
         }).always(function() {
             Loading.addClass('hidden');
         });
