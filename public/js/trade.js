@@ -36,7 +36,7 @@ function sendOptionBindings(){
                     console.log(data);
                 })
                 .always(function() {
-                    refreshStepList(true);
+                    refreshStepList($(' #refresh '));
                 });
         }
         else{
