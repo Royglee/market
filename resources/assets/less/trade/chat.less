@@ -9,7 +9,7 @@
 #chat{
   outline: none;
   resize: none;
-  overflow: auto;
+  overflow: hidden;
   border:none;
   border-top: 2px solid #c8c8c8;
   padding-top: 5px;
@@ -23,6 +23,10 @@
   right: 7px;
   font-size: 24px;
   color: #5095d5;
+  &:hover{
+    color: darken(#5095d5,10%);
+    cursor: pointer;
+  }
 }
 
 .textarea-cont{
