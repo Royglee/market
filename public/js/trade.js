@@ -67,7 +67,7 @@ function refreshStepList($this){
         });
 }
 function chatScrollTop(duration){
-    $('#chat-area').animate({ scrollTop: $("#chat-area")[0].scrollHeight}, duration);
+    $('#chat-area').stop().animate({ scrollTop: $("#chat-area")[0].scrollHeight}, duration);
 }
 function sendChatMessage() {
     var input = $('#chat');
@@ -80,7 +80,7 @@ function sendChatMessage() {
         bubble.css('color', 'blue');
 
         bubble.insertBefore($('#type-area'));
-        chatScrollTop(200);
+        chatScrollTop(500);
 
         $.post(window.location.href.split('?')[0] + "/chat", {message: message})
             .done(function (data) {
@@ -126,7 +126,7 @@ $.post( "/api/token/" + $('#chat').data('order'), function( data ){
         if(!$("#chat").is(":focus")) {
             $('#chatAudio')[0].play();
         }
-        chatScrollTop(200);
+        chatScrollTop(500);
     });
 
     socket.on('partner_typing', function(message){
