@@ -12,10 +12,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="chat-area col-sm-12" id="chat-area">
-                                @foreach($order->thread->messages as $message)
-                                    <div  class="chat-message {{(Auth::user()==$message->user)?"left":"right"}}">{{$message->user->name}} : {{$message->body}}</div>
-                                @endforeach
+                        <div class="col-sm-12"  id="chat-area">
+                            @foreach($order->thread->messages as $message)
+                                <div  class="chat-message {{(Auth::user()==$message->user)?"left":"right"}}">{{$message->user->name}} : {{$message->body}}</div>
+                            @endforeach
                             <div id="type-area" class=" col-sm-12 "></div>
                         </div>
                         <div class="clearfix"></div>
@@ -28,19 +28,19 @@
             </div>
 
             <div class="col-sm-8 trade-status-wrapper">
-                   <div class="trade-status">
-                       <div class="row">
-                           <div class="trade trade-status-title col-sm-12">
-                               <h3>
-                                   Trade status
-                                   <span id="refresh" class="glyphicon glyphicon-repeat pull-right" aria-hidden="true"></span>
-                               </h3>
-                           </div>
-                       </div>
-                       <div class="col-sm-12" id="tradelist">
+                <div class="trade-status">
+                    <div class="row">
+                        <div class="trade trade-status-title col-sm-12">
+                            <h3>
+                                Trade status
+                                <span id="refresh" class="glyphicon glyphicon-repeat pull-right" aria-hidden="true"></span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" id="tradelist">
                         @include('orders.partials.steps', ['order' => $order])
-                       </div>
-                   </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row" style="padding:10px">

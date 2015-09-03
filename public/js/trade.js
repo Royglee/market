@@ -80,6 +80,7 @@ function sendChatMessage() {
         bubble.css('color', 'blue');
 
         bubble.insertBefore($('#type-area'));
+        stackFromBottom();
         chatScrollTop(500);
 
         $.post(window.location.href.split('?')[0] + "/chat", {message: message})
@@ -96,6 +97,25 @@ function sendChatMessage() {
                 }
             });
     }
+}
+
+var paddingOk = false;
+function stackFromBottom(){
+    if(!paddingOk){
+        var chatBox = $('#chat-area');
+        var contentHeight = 0;
+
+        chatBox.children('div').each(function () {
+            contentHeight+=$(this).outerHeight(true);
+        });
+
+        var padding = chatBox[0].offsetHeight-contentHeight;
+        var paddingTop = padding>10?padding:10
+        if (padding < -60){paddingOk = true}
+
+        chatBox.css('paddingTop', paddingTop);
+    }
+
 }
 
 //----Bindings and Init
@@ -123,6 +143,7 @@ $.post( "/api/token/" + $('#chat').data('order'), function( data ){
         var typeArea = $('#type-area');
         $('<div class="chat-message right">' +message.sender+': '+ message.message +'</div>').insertBefore(typeArea);
         typeArea.text('');
+        stackFromBottom();
         if(!$("#chat").is(":focus")) {
             $('#chatAudio')[0].play();
         }
@@ -159,6 +180,7 @@ $( document ).ready(function() {
     sendOptionBindings();
     chatScrollTop(0);
     chooseFeedbackBindings();
+    stackFromBottom();
 
     $(' #refresh ').click(function() {
         refreshStepList($(this));
