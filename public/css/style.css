@@ -7307,6 +7307,8 @@ span.selected {
   overflow: scroll;
   overflow-x: hidden;
   overflow-y: auto;
+  display: table-cell;
+  vertical-align: bottom;
 }
 #chat {
   outline: none;
