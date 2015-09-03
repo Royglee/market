@@ -76,11 +76,11 @@ function sendChatMessage() {
         var me = input.data('name');
         input.val("");
 
-        var bubble = $('<div>' + me + ': ' + message + '</div>')
+        var bubble = $('<div class="chat-message left">' + me + ': ' + message + '</div>')
         bubble.css('color', 'blue');
 
-        $('#chat-area').append(bubble);
-        chatScrollTop(0);
+        bubble.insertBefore($('#type-area'));
+        chatScrollTop(200);
 
         $.post(window.location.href.split('?')[0] + "/chat", {message: message})
             .done(function (data) {
@@ -116,20 +116,24 @@ $.post( "/api/token/" + $('#chat').data('order'), function( data ){
     });
 
     socket.on('App\\Events\\TradeStatusChangedEvent', function(message){
-        if ( !$( "#feedback" ).length ){refreshStepList()};
+        if ( !$( "#feedback" ).length || ($( "#feedback").val() == ""  && $( "#review").val() == "")){refreshStepList()};
     });
 
     socket.on('App\\Events\\NewMessageEvent', function(message){
-        $('#chat-area').append($('<div>' +message.sender+': '+ message.message +'</div>'));
-        $('.type-area').addClass('hidden');
-        chatScrollTop(1000);
+        var typeArea = $('#type-area');
+        $('<div class="chat-message right">' +message.sender+': '+ message.message +'</div>').insertBefore(typeArea);
+        typeArea.text('');
+        if(!$("#chat").is(":focus")) {
+            $('#chatAudio')[0].play();
+        }
+        chatScrollTop(200);
     });
 
     socket.on('partner_typing', function(message){
-        var typeArea = $('.type-area');
-        typeArea.removeClass('hidden').text(message + ' is typing...');
+        var typeArea = $('#type-area');
+        typeArea.text(message + ' is typing...');
         setTimeout(function() {
-            typeArea.addClass('hidden');
+            typeArea.text('');
         }, 2000)
     });
 
@@ -169,4 +173,6 @@ $( document ).ready(function() {
             sendChatMessage();
         }
     });
+
+    $('<audio id="chatAudio"><source src="../sound/notify.mp3" type="audio/mpeg"><source src="../sound/notify.wav" type="audio/wav"></audio>').appendTo('body');
 });

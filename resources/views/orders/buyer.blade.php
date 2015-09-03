@@ -14,10 +14,10 @@
                     <div class="row">
                         <div class="chat-area col-sm-12" id="chat-area">
                                 @foreach($order->thread->messages as $message)
-                                    <div>{{$message->user->name}} : {{$message->body}}</div>
+                                    <div  class="chat-message {{(Auth::user()==$message->user)?"left":"right"}}">{{$message->user->name}} : {{$message->body}}</div>
                                 @endforeach
+                            <div id="type-area" class=" col-sm-12 "></div>
                         </div>
-                        <div class="type-area col-sm-12 hidden"></div>
                         <div class="clearfix"></div>
                         <div class="textarea-cont">
                             <textarea class="col-xs-12" name="message" id="chat" data-order="{{$order->id}}" data-name="{{Auth::user()->name}}" rows="1"></textarea>
