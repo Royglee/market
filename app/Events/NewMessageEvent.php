@@ -13,6 +13,7 @@ class NewMessageEvent extends Event implements ShouldBroadcast
     private $users;
     public $message;
     public $sender;
+    public $orderId;
 
     /**
      * Create a new event instance.
@@ -20,12 +21,14 @@ class NewMessageEvent extends Event implements ShouldBroadcast
      * @param $users
      * @param $sender
      * @param $message
+     * @param $orderId
      */
-    public function __construct($users, $sender, $message)
+    public function __construct($users, $sender, $message, $orderId)
     {
         $this->users = $users;
         $this->message = $message;
         $this->sender = $sender;
+        $this->orderId = $orderId;
     }
 
     /**

@@ -37,13 +37,13 @@ class TradeController extends Controller
                 if($commandArray['action']=='check' && $order->SellerDelivered == 0 && $order->BuyerCancelRequest == 0){
                     $order->SellerDelivered = 1;
                     $order->save();
-                    Event::fire(new TradeStatusChangedEvent([$order->buyer->id]));
+                    Event::fire(new TradeStatusChangedEvent([$order->buyer->id], $order->id));
                     return 200;
                 }
                 elseif($commandArray['action']=='cancel' && $order->SellerDelivered == 0 && $order->BuyerCancelRequest == 0){
                     $order->SellerDelivered = -1;
                     $order->save();
-                    Event::fire(new TradeStatusChangedEvent([$order->buyer->id]));
+                    Event::fire(new TradeStatusChangedEvent([$order->buyer->id], $order->id));
                     return 200;
                 }
             }
@@ -61,7 +61,7 @@ class TradeController extends Controller
                 ]);
                 $order->SellerSentFeedback = 1;
                 $order->save();
-                Event::fire(new TradeStatusChangedEvent([$order->buyer->id]));
+                Event::fire(new TradeStatusChangedEvent([$order->buyer->id], $order->id));
 
                 return 200;
             }
@@ -71,7 +71,7 @@ class TradeController extends Controller
                 if($commandArray['action']=='cancel' && $order->SellerDelivered == 0 && $order->BuyerCancelRequest == 0){
                     $order->BuyerCancelRequest = 1;
                     $order->save();
-                    Event::fire(new TradeStatusChangedEvent([$order->seller->id]));
+                    Event::fire(new TradeStatusChangedEvent([$order->seller->id], $order->id));
                     return 200;
                 }
             }
@@ -81,19 +81,19 @@ class TradeController extends Controller
                     $order->save();
 
                     $this->dispatch(new ExecutePayment($order));
-                    Event::fire(new TradeStatusChangedEvent([$order->seller->id]));
+                    Event::fire(new TradeStatusChangedEvent([$order->seller->id], $order->id));
                     return 200;
                 }
                 elseif($commandArray['action']=='error' && $order->SellerDelivered == 1 && $order->BuyerChecked == 0){
                     $order->BuyerChecked = -1;
                     $order->save();
-                    Event::fire(new TradeStatusChangedEvent([$order->seller->id]));
+                    Event::fire(new TradeStatusChangedEvent([$order->seller->id], $order->id));
                     return 200;
                 }
                 elseif($commandArray['action']=='error' && $order->SellerDelivered == 1 && $order->BuyerChecked == 0){
                     $order->BuyerChecked = -1;
                     $order->save();
-                    Event::fire(new TradeStatusChangedEvent([$order->seller->id]));
+                    Event::fire(new TradeStatusChangedEvent([$order->seller->id], $order->id));
                     return 200;
                 }
             }
@@ -111,7 +111,7 @@ class TradeController extends Controller
                 ]);
                 $order->BuyerSentFeedback = 1;
                 $order->save();
-                Event::fire(new TradeStatusChangedEvent([$order->seller->id]));
+                Event::fire(new TradeStatusChangedEvent([$order->seller->id], $order->id));
                     return 200;
             }
 
@@ -160,7 +160,7 @@ class TradeController extends Controller
             ->participants()
             ->whereNotIn('user_id', [$request->user()->id])
             ->lists('user_id')->all(); //összes résztvevõ idje listázva, kivéve a küldõ
-        Event::fire(new NewMessageEvent($users, Auth::user()->name, $request->get('message')));
+        Event::fire(new NewMessageEvent($users, Auth::user()->name, $request->get('message'),$order->id));
 
         return [Auth::user()->name];
 

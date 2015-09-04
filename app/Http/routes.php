@@ -21,10 +21,6 @@ Route::get('/success', function(){
 Route::get('/eventtest', function(){
     return view('test');
 });
-get('change', function(){
-    Event::fire(new TradeStatusChangedEvent());
-    return 'event fired';
-});
 
 // End of test things
 
@@ -60,7 +56,7 @@ get('trade/reset/{order}',function($order){
 });
 
 //Websocket
-post('api/token/{order}','WebsocketController@token');
+post('api/token/{order}','WebsocketController@tokenForTrade');
 post('api/token','WebsocketController@token');
 //get('api/token','WebsocketController@token');
 

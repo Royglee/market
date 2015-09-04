@@ -130,32 +130,43 @@ $.ajaxSetup({
 
 //----Socket.io Connection and events
 var lastEvent = 0;
+var token;
 $.post( "/api/token/" + $('#chat').data('order'), function( data ){
+    token = jwt_decode(data);
     var socket = io.connect(location.protocol+"//"+ location.host+":6001", {
         'query': 'token=' + data
     });
 
     socket.on('App\\Events\\TradeStatusChangedEvent', function(message){
-        if ( !$( "#feedback" ).length || ($( "#feedback").val() == ""  && $( "#review").val() == "")){refreshStepList()};
+        if (message.orderId == token.orderId && (!$( "#feedback" ).length || ($( "#feedback").val() == ""  && $( "#review").val() == "")))
+        {
+            refreshStepList()
+        };
     });
 
     socket.on('App\\Events\\NewMessageEvent', function(message){
-        var typeArea = $('#type-area');
-        $('<div class="chat-message right">' +message.sender+': '+ message.message +'</div>').insertBefore(typeArea);
-        typeArea.text('');
-        stackFromBottom();
-        if(!$("#chat").is(":focus")) {
-            $('#chatAudio')[0].play();
+        if(token.orderId == message.orderId) {
+            var typeArea = $('#type-area');
+            $('<div class="chat-message right">' + message.sender + ': ' + message.message + '</div>').insertBefore(typeArea);
+            typeArea.text('');
+
+            stackFromBottom();
+            if (!$("#chat").is(":focus")) {
+                $('#chatAudio')[0].play();
+            }
+            chatScrollTop(500);
         }
-        chatScrollTop(500);
     });
 
     socket.on('partner_typing', function(message){
-        var typeArea = $('#type-area');
-        typeArea.text(message + ' is typing...');
-        setTimeout(function() {
-            typeArea.text('');
-        }, 2000)
+        if(token.orderId == message.orderId){
+            var typeArea = $('#type-area');
+            typeArea.text(message.name + ' is typing...');
+            setTimeout(function() {
+                typeArea.text('');
+            }, 2000);
+        }
+
     });
 
     socket.on("error", function(error) {

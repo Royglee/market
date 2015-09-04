@@ -34,7 +34,7 @@ io.on('connection', function (socket) {
     socket.on('typing', function (data) {
         var partners = socket.decoded_token.partners;
         for (var i = 0; i < partners.length; i++) {
-            io.to(partners[i]).emit('partner_typing', socket.decoded_token.user_name);
+            io.to(partners[i]).emit('partner_typing', {'name': socket.decoded_token.user_name, 'orderId':socket.decoded_token.orderId});
         }
     });
 });

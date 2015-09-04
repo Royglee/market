@@ -52,7 +52,7 @@ class PaypalController extends Controller
                 $order =$order->where('payKey', $IPNMessage['pay_key'])->first();
                 $order->paid = 1;
                 $order->save();
-                Event::fire(new TradeStatusChangedEvent([$order->seller->id, $order->buyer->id]));
+                Event::fire(new TradeStatusChangedEvent([$order->seller->id, $order->buyer->id], $order->id));
             }
         } else {
             Log::info("INVALID");
